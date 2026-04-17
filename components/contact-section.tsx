@@ -38,7 +38,7 @@ export function ContactSection() {
                     </div>
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">ГОРЯЧАЯ ЛИНИЯ</p>
-                      <a href="tel:+79782729998" className="text-xl font-bold text-foreground hover:text-primary transition-colors">+7 (978) 272-99-98</a>
+                      <a href="tel:+79785350407" className="text-xl font-bold text-foreground hover:text-primary transition-colors">+7 (978) 535-04-07</a>
                     </div>
                   </div>
 
@@ -58,7 +58,7 @@ export function ContactSection() {
                     </div>
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">ОФИС</p>
-                      <p className="text-xl font-bold text-foreground">г. Евпатория, ул. Эскадронная 11 офис 8</p>
+                      <p className="text-xl font-bold text-foreground">Республика Крым, г. Евпатория, ул. Эскадронная 11 офис 8</p>
                     </div>
                   </div>
                 </div>
@@ -93,9 +93,14 @@ export function ContactSection() {
                           <SelectValue placeholder="Выберите категорию" />
                         </SelectTrigger>
                         <SelectContent className="rounded-xl">
-                          <SelectItem value="construction">Строительство</SelectItem>
+                          <SelectItem value="construction">Строительство домов</SelectItem>
                           <SelectItem value="renovation">Ремонт и отделка</SelectItem>
-                          <SelectItem value="engineering">Инженерия</SelectItem>
+                          <SelectItem value="engineering">Инженерные системы</SelectItem>
+                          <SelectItem value="design">Дизайн интерьеров</SelectItem>
+                          <SelectItem value="realestate">Недвижимость</SelectItem>
+                          <SelectItem value="education">Обучение</SelectItem>
+                          <SelectItem value="consultation">Консультация</SelectItem>
+                          <SelectItem value="tech_rent">Аренда спецтехники</SelectItem>
                           <SelectItem value="other">Другое</SelectItem>
                         </SelectContent>
                       </Select>

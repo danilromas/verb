@@ -1,6 +1,12 @@
-import { Star, MessageCircle, ArrowRight, ExternalLink, Quote } from "lucide-react"
+"use client"
+
+import { Star, MessageCircle, ArrowRight, ExternalLink, Quote, X } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { useState } from "react"
 
 const reviews = [
   {
@@ -42,6 +48,18 @@ const partners = [
 ]
 
 export function AdditionalSections() {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const handlePartnershipSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitted(true)
+    setTimeout(() => {
+      setIsSubmitted(false)
+      setIsDialogOpen(false)
+    }, 3000)
+  }
+
   return (
     <>
       {/* Reviews Section */}
@@ -156,7 +174,11 @@ export function AdditionalSections() {
               <p className="text-white/80 max-w-xl mx-auto mb-10 text-lg relative z-10">
                 Мы открыты к сотрудничеству с надежными поставщиками материалов и профессиональными бригадами.
               </p>
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 rounded-2xl h-14 px-10 text-lg shadow-xl shadow-black/10 transition-all hover:scale-105 relative z-10">
+              <Button 
+                size="lg" 
+                className="bg-white text-primary hover:bg-white/90 rounded-2xl h-14 px-10 text-lg shadow-xl shadow-black/10 transition-all hover:scale-105 relative z-10"
+                onClick={() => setIsDialogOpen(true)}
+              >
                 Подать заявку на партнерство
                 <ExternalLink className="w-5 h-5 ml-2" />
               </Button>
@@ -164,6 +186,71 @@ export function AdditionalSections() {
           </div>
         </div>
       </section>
+
+      {/* Partnership Form Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold">Заявка на партнерство</DialogTitle>
+            <DialogDescription className="text-muted-foreground">
+              Заполните форму, и мы свяжемся с вами в течение 1 рабочего дня.
+            </DialogDescription>
+          </DialogHeader>
+          
+          {isSubmitted ? (
+            <div className="py-8 text-center">
+              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
+                <Star className="w-10 h-10 text-green-600" />
+              </div>
+              <h3 className="text-xl font-bold text-foreground mb-2">Заявка отправлена!</h3>
+              <p className="text-muted-foreground">Спасибо за интерес к сотрудничеству.</p>
+            </div>
+          ) : (
+            <form onSubmit={handlePartnershipSubmit} className="space-y-4 mt-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Название компании / ФИО</label>
+                <Input placeholder="Введите название компании или ваше имя" required />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Телефон</label>
+                <Input placeholder="+7 (___) ___-__-__" required />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Email</label>
+                <Input placeholder="email@example.com" type="email" required />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Тип сотрудничества</label>
+                <select className="w-full h-10 rounded-lg border border-border bg-background px-3">
+                  <option>Поставщик материалов</option>
+                  <option>Строительная бригада</option>
+                  <option>Проектная организация</option>
+                  <option>Другое</option>
+                </select>
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Комментарий</label>
+                <Textarea placeholder="Расскажите о вашей компании и виде деятельности" className="min-h-[100px]" />
+              </div>
+              
+              <div className="flex gap-3 pt-2">
+                <DialogClose asChild>
+                  <Button type="button" variant="outline" className="flex-1">
+                    Отмена
+                  </Button>
+                </DialogClose>
+                <Button type="submit" className="flex-1">
+                  Отправить заявку
+                </Button>
+              </div>
+            </form>
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   )
 }

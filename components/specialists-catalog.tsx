@@ -6,6 +6,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 
+const scrollToContact = () => {
+  const element = document.getElementById("contact")
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" })
+  }
+}
+
 const categories = ["Все", "Строительство", "Ремонт", "Инженерия", "Проектирование", "Дизайн"]
 
 const specialists = [
@@ -86,7 +93,7 @@ export function SpecialistsCatalog() {
             <div className="max-w-xl">
               <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">Каталог специалистов</h2>
               <p className="text-muted-foreground text-lg">
-                Выбирайте проверенных профессионалов для ваших задач или доверьте подбор нашей системе.
+                Выбирайте проверенных профессионалов из нашего штата для ваших задач или доверьте подбор нашей системе. Все специалисты работают напрямую с нами.
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -156,7 +163,7 @@ export function SpecialistsCatalog() {
                       {specialist.category}
                     </Badge>
                     <Badge variant="secondary" className="bg-muted/50 font-normal text-xs py-1 px-3">
-                      Проверен
+                      В штате компании
                     </Badge>
                     <Badge variant="secondary" className="bg-muted/50 font-normal text-xs py-1 px-3">
                       8 лет опыта
@@ -168,8 +175,8 @@ export function SpecialistsCatalog() {
                       <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold mb-1">СТОИМОСТЬ</span>
                       <span className="text-lg font-bold text-foreground">{specialist.price}</span>
                     </div>
-                    <Button size="sm" className="rounded-xl px-6 h-10">
-                      Связаться
+                    <Button size="sm" className="rounded-xl px-6 h-10" onClick={scrollToContact}>
+                      Связаться с нами
                     </Button>
                   </div>
                 </div>

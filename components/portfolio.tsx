@@ -10,15 +10,15 @@ const portfolioItems = [
     id: 1,
     title: "Вилла в Ялте",
     category: "Дома",
-    description: "Проектирование и строительство загородного дома площадью 350 м² с панорамным остеклением.",
-    image: "/modern-repaired-highway-in-crimea-after-constructi.jpg", // Using available images
+    description: "Проектирование и строительство загородного дома площадью 350 м² с панорамным остеклением и современной планировкой.",
+    image: "/modern-repaired-highway-in-crimea-after-constructi.jpg",
     tags: ["Строительство", "Архитектура"],
   },
   {
     id: 2,
     title: "Апартаменты 'Бриз'",
     category: "Ремонт",
-    description: "Дизайн-проект и ремонт под ключ в современном минималистичном стиле.",
+    description: "Дизайн-проект и ремонт под ключ в современном минималистичном стиле с использованием экологичных материалов.",
     image: "/modern-urban-street-in-armyansk-after-infrastructu.jpg",
     tags: ["Ремонт", "Дизайн"],
   },
@@ -26,9 +26,33 @@ const portfolioItems = [
     id: 3,
     title: "Бизнес-центр 'Крым'",
     category: "Коммерция",
-    description: "Комплексное обслуживание инженерных систем и систем безопасности.",
+    description: "Современный бизнес-центр класса А с площадью от 50 до 500 м². Полный комплекс услуг: аренда помещений, обслуживание инженерных систем, круглосуточная охрана, высокоскоростной интернет, конференц-залы, подземная парковка и панорамные виды на город. Идеальное место для размещения офисов, IT-компаний и представительств крупных корпораций.",
     image: "/completed-infrastructure-object-based-on-engineeri.jpg",
     tags: ["Инженерия", "Коммерция"],
+  },
+  {
+    id: 4,
+    title: "Коттеджный посёлок 'Солнечный'",
+    category: "Дома",
+    description: "Строительство 15 коттеджей с единой архитектурной концепцией и развитой инфраструктурой.",
+    image: "/federal-highway-construction-site-in-crimea-beginn.jpg",
+    tags: ["Строительство", "Инфраструктура"],
+  },
+  {
+    id: 5,
+    title: "Офис IT-компании",
+    category: "Коммерция",
+    description: "Полный ремонт и адаптация помещения под современный офис с открытым пространством.",
+    image: "/professional-construction-team-at-office-in-simfer.jpg",
+    tags: ["Ремонт", "Дизайн"],
+  },
+  {
+    id: 6,
+    title: "Ресторан 'Морской'",
+    category: "Коммерция",
+    description: "Дизайн и строительство ресторана с морской тематикой и террасой на берегу моря.",
+    image: "/construction-technical-consultation-blueprints-and.jpg",
+    tags: ["Строительство", "Дизайн"],
   },
 ]
 
@@ -48,7 +72,7 @@ export function Portfolio() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="max-w-xl">
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">Портфолио проектов</h2>
+              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">Примеры работ</h2>
               <p className="text-muted-foreground text-lg">
                 Реализованные кейсы: от частных резиденций до крупных коммерческих и инфраструктурных объектов.
               </p>

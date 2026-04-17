@@ -75,10 +75,11 @@ export function Footer() {
             <div>
               <h4 className="font-bold text-foreground mb-6 uppercase tracking-widest text-xs">Контакты</h4>
               <div className="space-y-4">
-                <a href="tel:+79782729998" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                  +7 (978) 272-99-98
+                <a href="tel:+79785350407" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
+                  +7 (978) 535-04-07
                 </a>
                 <p className="text-sm text-muted-foreground">
+                  Республика Крым,
                   г. Евпатория,<br />
                   ул. Эскадронная 11 офис 8
 
