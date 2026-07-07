@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Коммерческое предложение — Партнёрство | IBP</title>
+<style>
+:root {
+  --ink: #0f1419;
+  --ink-soft: #1e2832;
+  --paper: #ffffff;
+  --paper-alt: #f7f8fa;
+  --line: #e2e6eb;
+  --muted: #6b7785;
+  --gold: #b8954a;
+  --gold-light: #f5f0e6;
+  --gold-dark: #8a6f32;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--ink);
+  color: #fff;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 55%; height: 100%;
+  background: linear-gradient(135deg, transparent 40%, rgba(184,149,74,.07) 100%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+.doc-label {
+  font-size: .7rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  max-width: 780px;
+}
+.hero h1 strong { font-weight: 700; color: #fff; }
+.hero-lead {
+  margin-top: 1.75rem;
+  font-size: 1.1rem;
+  color: #9aa8b8;
+  max-width: 560px;
+  line-height: 1.7;
+}
+.hero-meta {
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+.hero-meta div { }
+.hero-meta .val { font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; }
+.hero-meta .lbl { font-size: .78rem; color: #7a8a9a; margin-top: .3rem; letter-spacing: .04em; }
+.hero-cta {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+.btn {
+  display: inline-block;
+  padding: .85rem 2rem;
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.btn-primary { background: var(--gold); color: var(--ink); }
+.btn-primary:hover { background: #d4b06a; }
+.btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.3); }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── LAYOUT ── */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+section { padding: 5rem 0; }
+section.alt { background: var(--paper-alt); }
+.section-tag {
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  font-weight: 700;
+  margin-bottom: .75rem;
+}
+section h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 300;
+  letter-spacing: -.01em;
+  margin-bottom: 1rem;
+  color: var(--ink);
+}
+section h2 em { font-style: normal; font-weight: 700; }
+section > .wrap > p.lead {
+  color: var(--muted);
+  max-width: 640px;
+  font-size: 1.05rem;
+  margin-bottom: 2.5rem;
+}
+
+/* ── EXEC SUMMARY ── */
+.exec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+.exec-grid blockquote {
+  border-left: 3px solid var(--gold);
+  padding: 1rem 0 1rem 1.5rem;
+  font-size: 1.15rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+.exec-points { list-style: none; }
+.exec-points li {
+  padding: .85rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: .92rem;
+  display: flex; gap: .75rem;
+}
+.exec-points li::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  background: var(--ink);
+  padding: 3rem 2rem;
+}
+.stats-bar .wrap {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+.stat-item .num { font-size: 2.5rem; font-weight: 700; color: var(--gold); line-height: 1; }
+.stat-item .txt { font-size: .8rem; color: #8a9aaa; margin-top: .4rem; letter-spacing: .03em; }
+
+/* ── BENEFITS ── */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.benefit {
+  background: var(--paper);
+  padding: 2rem 1.75rem;
+}
+.benefit .num {
+  font-size: .7rem;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: .15em;
+  margin-bottom: 1rem;
+}
+.benefit h3 { font-size: 1rem; font-weight: 700; margin-bottom: .6rem; }
+.benefit p { font-size: .85rem; color: var(--muted); line-height: 1.65; }
+
+/* ── PORTFOLIO ── */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.port-card {
+  border: 1px solid var(--line);
+  padding: 1.5rem;
+  background: var(--paper);
+  transition: border-color .2s;
+}
+.port-card:hover { border-color: var(--gold); }
+.port-card .cnt { font-size: 1.8rem; font-weight: 700; color: var(--ink); }
+.port-card .cat { font-size: .82rem; color: var(--muted); margin-top: .25rem; }
+
+/* ── COOPERATION ── */
+.coop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.coop-card {
+  border: 1px solid var(--line);
+  padding: 2rem;
+  position: relative;
+}
+.coop-card.featured {
+  border-color: var(--gold);
+  background: var(--gold-light);
+}
+.coop-card .tier {
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  font-weight: 700;
+}
+.coop-card h3 { font-size: 1.2rem; margin: .5rem 0 1rem; font-weight: 700; }
+.coop-card ul { list-style: none; font-size: .85rem; color: var(--muted); }
+.coop-card ul li { padding: .35rem 0; padding-left: 1rem; position: relative; }
+.coop-card ul li::before { content: '·'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+
+/* ── BRANDS ── */
+.brands-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: 1.5rem;
+}
+.brand-tag {
+  padding: .45rem 1rem;
+  border: 1px solid var(--line);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--ink-soft);
+  background: var(--paper);
+}
+
+/* ── PROCESS ── */
+.process {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  counter-reset: step;
+}
+.process-step {
+  padding: 1.5rem 1.25rem;
+  border-top: 2px solid var(--line);
+  position: relative;
+  counter-increment: step;
+}
+.process-step::before {
+  content: counter(step, decimal-leading-zero);
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: .1em;
+  display: block;
+  margin-bottom: .75rem;
+}
+.process-step h4 { font-size: .88rem; font-weight: 700; margin-bottom: .4rem; }
+.process-step p { font-size: .78rem; color: var(--muted); }
+
+/* ── TERMS ── */
+.terms-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.terms-table th {
+  text-align: left;
+  padding: .75rem 1rem;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 600;
+  font-size: .78rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.terms-table td { padding: .75rem 1rem; border-bottom: 1px solid var(--line); }
+.terms-table tr:nth-child(even) td { background: var(--paper-alt); }
+
+/* ── CTA ── */
+.cta-block {
+  background: var(--ink);
+  color: #fff;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.cta-block h2 { color: #fff; font-weight: 300; font-size: 2rem; margin-bottom: .75rem; }
+.cta-block p { color: #8a9aaa; max-width: 480px; margin: 0 auto 2rem; }
+.cta-contacts {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+.cta-contacts div { text-align: center; }
+.cta-contacts .label { font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); }
+.cta-contacts .value { font-size: 1.1rem; margin-top: .3rem; color: #fff; }
+
+footer {
+  padding: 2rem;
+  text-align: center;
+  font-size: .75rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+}
+footer a { color: var(--gold-dark); text-decoration: none; }
+
+@media (max-width: 900px) {
+  .exec-grid, .benefits-grid, .coop-grid { grid-template-columns: 1fr; }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-bar .wrap { grid-template-columns: repeat(2, 1fr); }
+  .process { grid-template-columns: 1fr; }
+}
+@media (max-width: 500px) {
+  .portfolio-grid { grid-template-columns: 1fr; }
+  section { padding: 3rem 0; }
+  .hero { min-height: auto; padding: 3rem 1.25rem; }
+  .wrap { padding: 0 1.25rem; }
+}
+@media print {
+  .hero { min-height: auto; page-break-after: always; }
+  .btn { display: none; }
+  section { padding: 2rem 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="doc-label">Коммерческое предложение · 2026</div>
+    <h1>Партнёрство в поставках<br><strong>инженерного и солнечного оборудования</strong></h1>
+    <p class="hero-lead">
+      Готовая продуктовая база, актуальные дилерские цены и полный каталог для вашего бизнеса.
+      Предлагаем системное сотрудничество интеграторам, дилерам и проектным организациям.
+    </p>
+    <div class="hero-meta">
+      <div><div class="val">484+</div><div class="lbl">позиций в каталоге</div></div>
+      <div><div class="val">22</div><div class="lbl">бренда-производителя</div></div>
+      <div><div class="val">372</div><div class="lbl">модели инверторов</div></div>
+      <div><div class="val">9</div><div class="lbl">товарных направлений</div></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#cooperation" class="btn btn-primary">Форматы сотрудничества</a>
+      <a href="#contact" class="btn btn-outline">Связаться с нами</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ EXECUTIVE SUMMARY ═══════════════ -->
+<section>
+  <div class="wrap">
+    <div class="section-tag">Суть предложения</div>
+    <h2>Один партнёр — <em>полный цикл</em> комплектации</h2>
+    <div class="exec-grid">
+      <blockquote>
+        Мы формируем единый каталог инженерного оборудования: от солнечных панелей и инверторов
+        до аккумуляторов, креплений и комплектующих. Вы получаете структурированные данные,
+        дилерские цены и готовые материалы для продаж — без затрат на самостоятельный сбор информации.
+      </blockquote>
+      <ul class="exec-points">
+        <li>Актуальный прайс-лист SUNWAYS с розничными и дилерскими ценами в рублях</li>
+        <li>Полные карточки товаров: характеристики, описания, артикулы, изображения</li>
+        <li>Экспертный контент по брендам — рейтинги, преимущества, области применения</li>
+        <li>Готовность к масштабированию: сайт, КП, внутренняя база, прайс-листы</li>
+        <li>Прозрачная ценовая политика: РРЦ для конечного клиента, РФЦ для партнёра</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ STATS ═══════════════ -->
+<div class="stats-bar">
+  <div class="wrap">
+    <div class="stat-item"><div class="num">442</div><div class="txt">позиций с актуальными ценами</div></div>
+    <div class="stat-item"><div class="num">11</div><div class="txt">разделов прайс-листа</div></div>
+    <div class="stat-item"><div class="num">12</div><div class="txt">брендов в экспертном рейтинге</div></div>
+    <div class="stat-item"><div class="num">100%</div><div class="txt">структурированные данные</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════ BENEFITS ═══════════════ -->
+<section class="alt" id="benefits">
+  <div class="wrap">
+    <div class="section-tag">Преимущества для партнёра</div>
+    <h2>Почему это <em>выгодно</em></h2>
+    <p class="lead">Мы закрываем рутину по наполнению каталога — вы фокусируетесь на продажах и проектах.</p>
+    <div class="benefits-grid">
+      <div class="benefit">
+        <div class="num">01</div>
+        <h3>Дилерские цены</h3>
+        <p>РФЦ / Dealer Price с пересчётом в рубли. Юани и USD — для внутреннего учёта. Розничная РРЦ — для вашей наценки и КП клиенту.</p>
+      </div>
+      <div class="benefit">
+        <div class="num">02</div>
+        <h3>Готовый каталог</h3>
+        <p>484 позиции с названиями, артикулами, характеристиками и описаниями. Данные пригодны для прямой загрузки на сайт или в CRM.</p>
+      </div>
+      <div class="benefit">
+        <div class="num">03</div>
+        <h3>Экспертный контент</h3>
+        <p>Рейтинг 12 инверторных брендов: Schneider, Fronius, Huawei, Sungrow, GoodWe и другие — с полными описаниями для консультаций клиентов.</p>
+      </div>
+      <div class="benefit">
+        <div class="num">04</div>
+        <h3>Широкая линейка</h3>
+        <p>Инверторы, панели, AGM и LiFePO₄ аккумуляторы, контроллеры заряда, крепления, кабель, коннекторы — комплексные поставки из одних рук.</p>
+      </div>
+      <div class="benefit">
+        <div class="num">05</div>
+        <h3>Быстрые КП</h3>
+        <p>Структурированная база позволяет формировать коммерческие предложения за минуты, а не часы ручного поиска по прайсам.</p>
+      </div>
+      <div class="benefit">
+        <div class="num">06</div>
+        <h3>Масштабируемость</h3>
+        <p>Каталог расширяется: новые прайсы, сайты производителей, PDF-документация — единая система обновления без потери данных.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PORTFOLIO ═══════════════ -->
+<section id="portfolio">
+  <div class="wrap">
+    <div class="section-tag">Ассортимент</div>
+    <h2>Товарные <em>направления</em></h2>
+    <p class="lead">Каталог охватывает полный цикл солнечной и резервной энергетики.</p>
+    <div class="portfolio-grid">
+      <div class="port-card"><div class="cnt">264</div><div class="cat">Инверторы</div></div>
+      <div class="port-card"><div class="cnt">80</div><div class="cat">Инверторы и контроллеры</div></div>
+      <div class="port-card"><div class="cnt">46</div><div class="cat">Аккумуляторы AGM</div></div>
+      <div class="port-card"><div class="cnt">25</div><div class="cat">Литиевые LiFePO₄</div></div>
+      <div class="port-card"><div class="cnt">20</div><div class="cat">Солнечные панели</div></div>
+      <div class="port-card"><div class="cnt">11</div><div class="cat">Крепления</div></div>
+      <div class="port-card"><div class="cnt">8</div><div class="cat">Комплектующие</div></div>
+      <div class="port-card"><div class="cnt">2</div><div class="cat">Контроллеры заряда</div></div>
+    </div>
+
+    <div class="section-tag" style="margin-top:3rem">Ключевые бренды</div>
+    <div class="brands-strip">
+      <span class="brand-tag">Sunways</span>
+      <span class="brand-tag">Growatt</span>
+      <span class="brand-tag">Deye</span>
+      <span class="brand-tag">EPEVER</span>
+      <span class="brand-tag">Schneider Electric</span>
+      <span class="brand-tag">Fronius</span>
+      <span class="brand-tag">Huawei</span>
+      <span class="brand-tag">Sungrow</span>
+      <span class="brand-tag">SMA</span>
+      <span class="brand-tag">GoodWe</span>
+      <span class="brand-tag">COTEK</span>
+      <span class="brand-tag">SmartWatt</span>
+      <span class="brand-tag">Solax Power</span>
+      <span class="brand-tag">Outback Power</span>
+      <span class="brand-tag">Ingeteam</span>
+      <span class="brand-tag">Bineos</span>
+      <span class="brand-tag">Delta</span>
+      <span class="brand-tag">One-Sun</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ COOPERATION ═══════════════ -->
+<section class="alt" id="cooperation">
+  <div class="wrap">
+    <div class="section-tag">Сотрудничество</div>
+    <h2>Форматы <em>партнёрства</em></h2>
+    <p class="lead">Выберите модель, которая соответствует масштабу и задачам вашего бизнеса.</p>
+    <div class="coop-grid">
+      <div class="coop-card">
+        <div class="tier">Уровень 1</div>
+        <h3>Дилер</h3>
+        <ul>
+          <li>Дилерские цены (РФЦ) на весь каталог</li>
+          <li>Доступ к структурированному прайсу</li>
+          <li>Готовые описания для карточек товаров</li>
+          <li>Консультации по подбору оборудования</li>
+          <li>Минимальный объём — по согласованию</li>
+        </ul>
+      </div>
+      <div class="coop-card featured">
+        <div class="tier">Уровень 2 · Рекомендуем</div>
+        <h3>Интегратор</h3>
+        <ul>
+          <li>Всё из уровня «Дилер»</li>
+          <li>Проектные цены на комплекты СЭС</li>
+          <li>Помощь в формировании КП для заказчика</li>
+          <li>Приоритет по наличию и срокам</li>
+          <li>Техническая документация и спецификации</li>
+          <li>Совместные проекты и референсы</li>
+        </ul>
+      </div>
+      <div class="coop-card">
+        <div class="tier">Уровень 3</div>
+        <h3>Опт / Дистрибуция</h3>
+        <ul>
+          <li>Максимальные условия по цене</li>
+          <li>Эксклюзивные условия в регионе — обсуждаемо</li>
+          <li>White-label каталог под вашим брендом</li>
+          <li>API / выгрузка данных для вашей системы</li>
+          <li>Совместное развитие ассортимента</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PROCESS ═══════════════ -->
+<section>
+  <div class="wrap">
+    <div class="section-tag">Как начать</div>
+    <h2>Пять шагов до <em>первой поставки</em></h2>
+    <div class="process">
+      <div class="process-step">
+        <h4>Заявка</h4>
+        <p>Оставляете запрос с указанием формата сотрудничества и профиля компании</p>
+      </div>
+      <div class="process-step">
+        <h4>Знакомство</h4>
+        <p>Обсуждаем ассортимент, объёмы, регион и специфику ваших проектов</p>
+      </div>
+      <div class="process-step">
+        <h4>Условия</h4>
+        <p>Фиксируем дилерские цены, сроки, логистику и формат работы с каталогом</p>
+      </div>
+      <div class="process-step">
+        <h4>Доступ</h4>
+        <p>Передаём актуальный прайс, каталог и материалы для ваших продаж</p>
+      </div>
+      <div class="process-step">
+        <h4>Поставка</h4>
+        <p>Первая отгрузка, сопровождение проекта, обратная связь и масштабирование</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TERMS ═══════════════ -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-tag">Условия</div>
+    <h2>Ценовая <em>политика</em></h2>
+    <p class="lead">Прозрачная двухуровневая система цен — без скрытых надбавок.</p>
+    <table class="terms-table">
+      <thead>
+        <tr>
+          <th>Тип цены</th>
+          <th>Обозначение в прайсе</th>
+          <th>Назначение</th>
+          <th>Валюта</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Розничная</strong></td>
+          <td>РРЦ, РЦ, Retail Price</td>
+          <td>Рекомендованная цена для конечного покупателя, основа для вашей наценки в КП</td>
+          <td>Рубли (основная) · юани / USD (внутр.)</td>
+        </tr>
+        <tr>
+          <td><strong>Дилерская</strong></td>
+          <td>РФЦ, Dealer Price</td>
+          <td>Закупочная цена партнёра, фиксируется при заключении соглашения</td>
+          <td>Рубли (основная) · юани / USD (внутр.)</td>
+        </tr>
+        <tr>
+          <td><strong>Прочие</strong></td>
+          <td>—</td>
+          <td>Не применяются в партнёрских расчётах</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta-block" id="contact">
+  <div class="wrap">
+    <h2>Готовы обсудить сотрудничество?</h2>
+    <p>Оставьте заявку — подготовим индивидуальные условия и актуальный прайс под ваш профиль.</p>
+    <a href="mailto:info@ibp.ru?subject=Запрос%20на%20партнёрство" class="btn btn-primary">Направить запрос</a>
+    <div class="cta-contacts">
+      <div>
+        <div class="label">Электронная почта</div>
+        <div class="value">info@ibp.ru</div>
+      </div>
+      <div>
+        <div class="label">Телефон</div>
+        <div class="value">+7 (___) ___-__-__</div>
+      </div>
+      <div>
+        <div class="label">Каталог</div>
+        <div class="value"><a href="index.html" style="color:var(--gold);text-decoration:none">Открыть полный каталог →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  IBP · Коммерческое предложение о партнёрстве · Июль 2026<br>
+  Данные каталога актуальны на дату формирования · <a href="index.html">Полный каталог оборудования</a>
+</footer>
+
+</body>
+</html>

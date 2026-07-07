@@ -1,112 +1,101 @@
-import { Smartphone, LayoutDashboard, Camera, QrCode, ShieldCheck } from "lucide-react"
+import Link from "next/link"
+import { ArrowUpRight, QrCode } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const features = [
-  {
-    title: "Личный кабинет заказчика",
-    description: "Весь ваш проект в одном приложении. Управляйте задачами, просматривайте документы и оплачивайте счета онлайн.",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Отслеживание в реальном времени",
-    description: "Визуальный прогресс-бар каждого этапа работ. Вы всегда знаете, что происходит на объекте прямо сейчас.",
-    icon: Smartphone,
-  },
-  {
-    title: "Фото и видео отчёты",
-    description: "Ежедневные обновления с площадки. Просматривайте галерею выполненных работ и этапов скрытых коммуникаций.",
-    icon: Camera,
-  },
-  {
-    title: "QR-коды на объекте",
-    description: "Сканируйте коды на месте для моментального доступа к чертежам, спецификациям и контактным лицам.",
-    icon: QrCode,
-  },
-  {
-    title: "Полная прозрачность",
-    description: "История изменений, фиксация всех договоренностей и прозрачная смета без скрытых платежей.",
-    icon: ShieldCheck,
-  },
-]
+import { platformFeatures } from "@/lib/site-data"
 
 export function DigitalFeatures() {
   return (
-    <section id="digital-features" className="py-24 bg-background relative overflow-hidden">
-      {/* Decorative Gradient Background */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 rounded-l-[100px] -z-10 hidden lg:block" />
-
-      <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section id="digital-features" className="py-24">
+      <div className="section-shell">
+        <div className="grid items-center gap-8 xl:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium mb-6">
-              <span>Цифровое превосходство</span>
-            </div>
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 tracking-tight leading-tight">
-              Ваш проект в цифровом пространстве
+            <span className="eyebrow">Digital platform</span>
+            <h2 className="mt-6 text-3xl font-semibold leading-tight tracking-tight text-[var(--brand-ink)] md:text-5xl">
+              Управление объектом в цифровой среде, а не в хаосе чатов и звонков.
             </h2>
-            <p className="text-muted-foreground text-lg mb-10 leading-relaxed max-w-xl">
-              Мы объединили строительную экспертизу с современными IT-решениями, чтобы сделать процесс создания вашего дома максимально комфортным и прозрачным.
+            <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">
+              Цифровой кабинет клиента делает реализацию прозрачной: этапы, документы, фото, смета и ключевые решения
+              всегда собраны в одном месте.
             </p>
 
-            <div className="space-y-8">
-              {features.map((feature, index) => (
-                <div key={index} className="flex gap-6 group">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-muted flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                    <feature.icon className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                      {feature.title}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed text-sm">
-                      {feature.description}
-                    </p>
+            <div className="mt-10 space-y-4">
+              {platformFeatures.map((feature) => (
+                <div key={feature.title} className="section-card p-5">
+                  <div className="flex gap-4">
+                    <div className="rounded-2xl border border-border/70 bg-white/80 p-3 text-primary">
+                      <feature.icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-[var(--brand-ink)]">{feature.title}</h3>
+                      <p className="mt-2 text-sm leading-7 text-muted-foreground">{feature.description}</p>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-12">
-              <Button size="lg" className="rounded-xl h-14 px-8 text-lg">
-                Попробовать демо-кабинет
-              </Button>
-            </div>
+            <Button asChild size="lg" className="mt-8 h-14 rounded-xl px-8 text-base">
+              <Link href="/catalog">
+                Изучить сервисы и формат работы
+                <ArrowUpRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
           </div>
 
-          <div className="relative">
-            {/* Visual representation of the dashboard */}
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-border bg-card p-4 animate-in fade-in slide-in-from-right-8 duration-1000">
-              <div className="aspect-[4/3] bg-muted/50 rounded-2xl flex items-center justify-center p-8 overflow-hidden">
-                <div className="w-full h-full bg-background rounded-xl shadow-lg p-6 border border-border/50">
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="w-32 h-4 bg-muted rounded-full" />
-                    <div className="w-8 h-8 rounded-full bg-primary/10" />
+          <div className="section-card architect-grid relative overflow-hidden p-5 md:p-7">
+            <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="rounded-[1.75rem] border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(245,242,238,0.9))] p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">Кабинет клиента</div>
+                    <h3 className="mt-2 text-xl font-semibold text-[var(--brand-ink)]">Резиденция у побережья</h3>
                   </div>
-                  <div className="grid grid-cols-3 gap-4 mb-8">
-                    <div className="h-20 bg-muted/30 rounded-lg animate-pulse" />
-                    <div className="h-20 bg-muted/30 rounded-lg animate-pulse" />
-                    <div className="h-20 bg-muted/30 rounded-lg animate-pulse" />
+                  <div className="rounded-full border border-border/70 bg-white/80 px-3 py-1 text-xs font-semibold text-primary">live</div>
+                </div>
+
+                <div className="mt-6 grid grid-cols-3 gap-3">
+                  {["Смета", "График", "Документы"].map((item) => (
+                    <div key={item} className="rounded-2xl border border-border/70 bg-white/75 p-4 text-sm font-medium text-foreground/85">
+                      {item}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-5 rounded-2xl border border-border/70 bg-white/70 p-5">
+                  <div className="flex items-center justify-between text-sm text-muted-foreground">
+                    <span>Прогресс этапа</span>
+                    <span>65%</span>
                   </div>
-                  <div className="space-y-4">
-                    <div className="h-2 w-full bg-muted/20 rounded-full overflow-hidden">
-                      <div className="h-full w-2/3 bg-primary" />
-                    </div>
-                    <div className="flex justify-between text-xs text-muted-foreground">
-                      <span>Прогресс: 65%</span>
-                      <span>Этап: Внутренняя отделка</span>
-                    </div>
-                    <div className="h-40 bg-muted/10 rounded-xl border-2 border-dashed border-muted flex items-center justify-center">
-                      <Camera className="w-8 h-8 text-muted/40" />
-                    </div>
+                  <div className="mt-3 h-2 rounded-full bg-muted/40">
+                    <div className="h-2 w-2/3 rounded-full bg-[linear-gradient(90deg,var(--primary),var(--accent))]" />
+                  </div>
+                </div>
+
+                <div className="mt-5 rounded-[1.5rem] border border-dashed border-border bg-white/40 p-5">
+                  <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">Журнал площадки</div>
+                  <div className="mt-3 space-y-3">
+                    {["Фото скрытых работ загружены", "Акт на этап подготовлен", "Согласовано изменение по отделке"].map((log) => (
+                      <div key={log} className="rounded-xl bg-white/75 px-4 py-3 text-sm text-foreground/85">
+                        {log}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Floating elements for visual depth */}
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-background border border-border shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center animate-bounce duration-[3000ms]">
-               <QrCode className="w-12 h-12 text-primary mb-2" />
-               <span className="text-[10px] font-bold text-center">SCAN TO VIEW PROJECT</span>
+              <div className="flex flex-col gap-4">
+                <div className="rounded-[1.75rem] border border-border/70 bg-[linear-gradient(180deg,rgba(28,38,63,0.98),rgba(63,49,40,0.95))] p-6 text-white">
+                  <QrCode className="h-8 w-8 text-white/80" />
+                  <div className="mt-10 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">On-site access</div>
+                  <p className="mt-3 text-lg font-semibold">QR-коды на объекте для доступа к чертежам, этапам и контактам.</p>
+                </div>
+                <div className="rounded-[1.75rem] border border-border/70 bg-white/70 p-6">
+                  <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">Преимущество</div>
+                  <p className="mt-3 text-lg font-semibold text-[var(--brand-ink)]">
+                    Заказчик видит весь проект в понятной среде, а не собирает картину по кускам.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

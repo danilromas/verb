@@ -1,8 +1,10 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Building2, Users, CheckCircle2 } from "lucide-react"
 import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { ArrowRight, CheckCircle2 } from "lucide-react"
+import { siteStats } from "@/lib/site-data"
 
 export function HeroSection() {
   const scrollToSection = (id: string) => {
@@ -13,66 +15,81 @@ export function HeroSection() {
   }
 
   return (
-    <section id="hero" className="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden bg-background">
-      {/* Background abstraction */}
-      <div className="absolute inset-0 z-0 opacity-30">
-        <div className="absolute top-0 -left-4 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 -right-4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-primary/5 rounded-full" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-primary/5 rounded-full" />
-      </div>
+    <section id="hero" className="relative overflow-hidden pt-28">
+      <div className="absolute inset-0 architect-grid opacity-40" />
+      <div className="absolute left-0 top-0 h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,rgba(145,111,80,0.12),transparent_60%)] blur-3xl" />
+      <div className="absolute right-0 top-24 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(48,67,115,0.14),transparent_60%)] blur-3xl" />
 
-      <div className="container relative z-10 mx-auto px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-            <CheckCircle2 className="w-3 h-3" />
-            <span>Единая платформа сервиса в Крыму</span>
-          </div>
+      <div className="section-shell relative">
+        <div className="section-card overflow-hidden">
+          <div className="grid gap-8 px-6 py-6 md:px-10 md:py-10 xl:grid-cols-[0.95fr_1.05fr] xl:px-14 xl:py-14">
+            <div className="relative">
+              <div className="eyebrow mb-6">
+                <CheckCircle2 className="mr-2 h-3.5 w-3.5" />
+                crimea premium build
+              </div>
 
-          {/* Title */}
-          <h1 className="text-4xl md:text-7xl font-bold text-foreground mb-6 tracking-tight text-balance leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100">
-            Все услуги для строительства и ремонта — в одном месте
-          </h1>
-          
-          {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-10 font-normal max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-            От проекта до реализации и обслуживания
-          </p>
-          
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-300">
-            <Button
-              size="lg"
-              onClick={() => scrollToSection("contact")}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 h-14 px-8 text-lg rounded-xl shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Оставить заявку
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => scrollToSection("services")}
-              className="border-border hover:bg-muted h-14 px-8 text-lg rounded-xl transition-all"
-            >
-              Посмотреть услуги
-            </Button>
-          </div>
+              <h1 className="max-w-3xl text-4xl font-semibold leading-[1.02] tracking-tight text-[var(--brand-ink)] md:text-6xl xl:text-7xl">
+                Архитектура и строительство без визуального шума.
+              </h1>
 
-          {/* Trust Elements / Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 max-w-3xl mx-auto pt-8 border-t border-border/50 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500">
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-3xl font-bold text-foreground tracking-tight">150+</span>
-              <span className="text-sm text-muted-foreground font-medium uppercase tracking-wider">Проектов в Крыму</span>
+              <p className="mt-6 max-w-xl text-base leading-7 text-muted-foreground md:text-lg">
+                Полный цикл для частных и коммерческих объектов в Крыму: проект, реализация, контроль.
+              </p>
+
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <Button
+                  size="lg"
+                  onClick={() => scrollToSection("contact")}
+                  className="h-14 rounded-xl px-8 text-base shadow-lg shadow-primary/15"
+                >
+                  Обсудить объект
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="h-14 rounded-xl border-border/80 bg-white/60 px-8 text-base"
+                >
+                  <Link href="/catalog">Смотреть каталог направлений</Link>
+                </Button>
+              </div>
+
+              <div className="mt-10 grid grid-cols-2 gap-4 lg:max-w-xl">
+                {siteStats.map((stat) => (
+                  <div key={stat.label} className="rounded-[1.5rem] border border-border/70 bg-white/70 p-4 shadow-sm">
+                    <div className="text-2xl font-semibold tracking-tight text-[var(--brand-ink)]">{stat.value}</div>
+                    <div className="mt-1 text-xs leading-5 text-muted-foreground">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex flex-col items-center gap-1 border-x border-border/50 px-8">
-              <span className="text-3xl font-bold text-foreground tracking-tight">45+</span>
-              <span className="text-sm text-muted-foreground font-medium uppercase tracking-wider">Специалистов</span>
-            </div>
-            <div className="hidden md:flex flex-col items-center gap-1">
-              <span className="text-3xl font-bold text-foreground tracking-tight">8 лет</span>
-              <span className="text-sm text-muted-foreground font-medium uppercase tracking-wider">На рынке</span>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="relative min-h-[280px] overflow-hidden rounded-[2rem]">
+                <Image
+                  src="/brutalist-concrete-1.png"
+                  alt="Бетонная архитектурная композиция"
+                  fill
+                  className="object-cover grayscale"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70">Материал и форма</p>
+                  <p className="mt-2 text-xl font-semibold">Строгая архитектурная подача вместо перегруженного лендинга</p>
+                </div>
+              </div>
+              <div className="relative min-h-[280px] overflow-hidden rounded-[2rem]">
+                <Image
+                  src="/brutalist-concrete-2.png"
+                  alt="Монументальная бетонная архитектура"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              </div>
             </div>
           </div>
         </div>

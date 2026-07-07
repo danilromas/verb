@@ -1,0 +1,56 @@
+class j extends HTMLElement{constructor(){super();const x=this.querySelector("button[data-open-modal]"),L=this.querySelector("button[data-close-modal]"),o=this.querySelector("dialog"),c=this.querySelector("#search-input"),a=this.querySelector("#search-results"),u=this.querySelector("#pagination-container"),n=this.querySelector("#search-message"),v=()=>{o.showModal(),c.focus()},f=()=>{o.close(),a.innerHTML="",u.innerHTML="",n.textContent=""};o.addEventListener("click",s=>{s.target===o&&(f(),y())});const S=()=>{a.innerHTML=`
+					<div class="brr-search-skeleton-container">
+						<div class="brr-search-skeleton-category">
+							<div class="brr-search-skeleton-header">
+								<div class="brr-search-skeleton-title h-6 w-1/4 rounded bg-base-300 dark:bg-base-700"></div>
+								<div class="brr-search-skeleton-see-all h-4 w-16 rounded bg-base-300 dark:bg-base-700"></div>
+							</div>
+							<ul class="brr-search-skeleton-list space-y-2">
+								${Array(3).fill(`
+									<li class="brr-search-skeleton-item">
+										<div class="brr-search-skeleton-result h-5 w-full rounded bg-base-300 dark:bg-base-700"></div>
+									</li>
+								`).join("")}
+							</ul>
+						</div>
+						<div class="brr-search-skeleton-category mt-6">
+							<div class="brr-search-skeleton-header">
+								<div class="brr-search-skeleton-title h-6 w-1/4 rounded bg-base-300 dark:bg-base-700"></div>
+								<div class="brr-search-skeleton-see-all h-4 w-16 rounded bg-base-300 dark:bg-base-700"></div>
+							</div>
+							<ul class="brr-search-skeleton-list space-y-2">
+								${Array(2).fill(`
+									<li class="brr-search-skeleton-item">
+										<div class="brr-search-skeleton-result h-5 w-full rounded bg-base-300 dark:bg-base-700"></div>
+									</li>
+								`).join("")}
+							</ul>
+						</div>
+					</div>
+				`},m=()=>{a.innerHTML="",u.innerHTML="",n.textContent=""},h=async(s=1,b=5)=>{const i=c.value.trim();if(!i){m();return}n.textContent=`Searching for "${i}"...`;try{let p=function(e,l,t){e.preventDefault(),document.cookie=`search=${encodeURIComponent(t)}; path=/; max-age=3600`,document.cookie=`search_source=${l}; path=/; max-age=3600`;const r={news:"/blog/search",report:"/reports/search",industry:"/new-projects-near-me/search",glossary:"/glossary/search"};window.location.href=r[l]||"/search"};const _=`https://adminapi.blackridgeresearch.com/search?query=${encodeURIComponent(i)}&page=${s}&limit=${b}`,g=await fetch(_);if(!g.ok)throw new Error(`Network response was not ok. Status: ${g.status}`);const M=await g.json(),{results:k,total:T,totalPages:$}=M;if(!k||!k.length){n.textContent="No results found.",a.innerHTML="";return}const d={news:[],report:[],industry:[],glossary:[]};k.forEach(e=>{e.source==="Blog"||e.source==="News_Release"||e.source==="Project Profiles"?d.news.push(e):d[e.source]&&d[e.source].push(e)});const E=[{name:"Reports",source:"report",seeAllUrl:"/reports"},{name:"Industry Projects",source:"industry",seeAllUrl:"/new-projects-near-me"},{name:"News & Blogs",source:"news",seeAllUrl:"/blog"},{name:"Glossary",source:"glossary",seeAllUrl:"/glossary"}];n.textContent=`Found ${T} results for "${i}"`,a.innerHTML=E.filter(e=>d[e.source]?.length>0).map(e=>{const l=d[e.source];return`
+					    <div class="mb-6">
+					      <div class="flex justify-between items-center mb-2">
+					        <h3 class="text-lg font-semibold text-blue-600 dark:text-blue-400">${e.name}</h3>
+					        <a href="${e.seeAllUrl}" class="see-all-link text-sm text-blue-500 dark:text-blue-300 hover:underline" data-source="${e.source}">
+					          See All
+					        </a>
+					      </div>
+					      <ul class="space-y-2">
+					        ${l.slice(0,5).map(t=>{let r;switch(t.source){case"Blog":r=`/blog/${t.page_title}`;break;case"News_Release":r=`/news-releases/${t.page_title}`;break;case"Project Profiles":r=`/project-profiles/${t.page_title}`;break;case"report":r=`/reports/${t.page_title}`;break;case"industry":r=`/new-projects-near-me/${t.page_title}`;break;case"glossary":r=`/glossary/${t.page_title}`;break;default:r=`/blog/${t.page_title}`}return`
+					          <li class="pagefind-ui__result svelte-4xnkmf">
+					            <div class="pagefind-ui__result-inner svelte-4xnkmf">
+					              <p class="pagefind-ui__result-title svelte-4xnkmf">
+					                <a class="pagefind-ui__result-link svelte-4xnkmf" href="${r}">
+					                  ${t.title}
+					                </a>
+					              </p>
+					            </div>
+					          </li>`}).join("")}
+					      </ul>
+					    </div>`}).join(""),document.querySelectorAll(".see-all-link").forEach(e=>{e.addEventListener("click",l=>{p(l,e.dataset.source,i)})}),u.innerHTML=`
+	          <div class="pagination">
+	            <button ${s===1?"disabled":""} class="prev-page">Prev</button>
+	            <span>Page ${s} of ${$}</span>
+	            <button ${s===$?"disabled":""} class="next-page">Next</button>
+	          </div>
+	        `,document.querySelector(".prev-page")?.addEventListener("click",()=>h(s-1,b)),document.querySelector(".next-page")?.addEventListener("click",()=>h(s+1,b))}catch(p){console.error("Search failed:",p),n.textContent="Error fetching results. Please try again.",a.innerHTML=""}},y=()=>{c.value="",a.innerHTML="",u.innerHTML="",n.textContent=""};x.addEventListener("click",v),L.addEventListener("click",f);let w;c.addEventListener("input",()=>{S();const s=c.value.trim();clearTimeout(w),s.length>3?w=setTimeout(()=>{h(1,25)},800):m()}),this.querySelector(".pagefind-ui__search-clear").addEventListener("click",y),window.addEventListener("keydown",s=>{s.key==="/"&&!o.open&&(s.preventDefault(),v())})}}customElements.define("site-search",j);

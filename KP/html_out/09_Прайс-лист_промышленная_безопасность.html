@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Прайс-лист (Промышленная безопасность / Электробезопасность / ТЭУ) | Усадьба Вербицких</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #F9F6F2;
+            font-family: 'Inter', sans-serif;
+            color: #2E2A28;
+            line-height: 1.4;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            padding: 2rem 1.8rem 2.5rem 1.8rem;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid #E6DDD2;
+            padding-bottom: 1.5rem;
+        }
+        .company-name {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #5E4B6E 0%, #9B7BB5 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .sub {
+            color: #7B6B6B;
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+        }
+        .sub span i {
+            color: #B39CD0;
+            margin-right: 6px;
+        }
+        .section-title {
+            font-size: 1.9rem;
+            font-weight: 600;
+            margin: 1.8rem 0 1rem 0;
+            padding-left: 0.5rem;
+            border-left: 5px solid #B39CD0;
+            color: #3D2B3F;
+        }
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1.5rem 0 1rem 0;
+            border-radius: 20px;
+            border: 1px solid #EFE5DB;
+            background: white;
+        }
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 800px;
+        }
+        .price-table th:first-child,
+        .price-table td:first-child {
+            width: 120px;
+            text-align: center;
+            font-weight: 600;
+            background-color: #FDFCFB;
+        }
+        .price-table th {
+            background-color: #F5EFE9;
+            color: #3D2B3F;
+            font-weight: 600;
+            padding: 1rem 0.8rem;
+            text-align: center;
+            border-bottom: 1px solid #E0D3C8;
+            font-size: 0.9rem;
+        }
+        .price-table td {
+            padding: 0.9rem 0.6rem;
+            text-align: center;
+            border-bottom: 1px solid #F0E6DE;
+            color: #2E2A28;
+            word-break: break-word;
+        }
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+        .price-table tr:hover td {
+            background-color: #FCF8F4;
+        }
+        .price-table td.price-highlight {
+            font-weight: 700;
+            color: #7C5D8E;
+            white-space: nowrap;
+        }
+        .price-table th:nth-child(4),
+        .price-table td:nth-child(4),
+        .price-table th:nth-child(5),
+        .price-table td:nth-child(5) {
+            min-width: 120px;
+            white-space: nowrap;
+        }
+        .info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+            margin: 2.5rem 0 1rem 0;
+            background: #FEFCFA;
+            padding: 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #EFE5DB;
+        }
+        .contacts {
+            flex: 2;
+        }
+        .notes {
+            flex: 3;
+        }
+        .contacts p, .notes p {
+            margin: 0.7rem 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .contacts i, .notes i {
+            width: 28px;
+            color: #B39CD0;
+            font-size: 1.2rem;
+        }
+        .btn-print {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #B39CD0;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #2E2A28;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .btn-print:hover {
+            background: #9b7bb5;
+            transform: translateY(-2px);
+            color: white;
+        }
+        .btn-course {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #B39CD0;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #2E2A28;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 0.5rem;
+            text-decoration: none;
+        }
+        .btn-course:hover {
+            background: #9b7bb5;
+            transform: translateY(-2px);
+            color: white;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2.2rem;
+            font-size: 0.75rem;
+            color: #A9988C;
+            border-top: 1px solid #EFE5DB;
+            padding-top: 1.5rem;
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.2rem;
+            }
+            .company-name {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .price-table th, .price-table td {
+                padding: 0.6rem 0.4rem;
+                font-size: 0.75rem;
+            }
+            .price-table th:first-child,
+            .price-table td:first-child {
+                width: 90px;
+            }
+            .price-table th:nth-child(4),
+            .price-table td:nth-child(4),
+            .price-table th:nth-child(5),
+            .price-table td:nth-child(5) {
+                min-width: 85px;
+            }
+            .info-grid {
+                flex-direction: column;
+            }
+        }
+    
+
+        @media print {
+            .table-scroll-hint { display: none !important; }
+            .price-table thead,
+            .container > table thead { display: table-header-group !important; }
+            .price-table tbody tr,
+            .container > table tbody tr {
+                display: table-row !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+            .price-table td,
+            .container > table td {
+                display: table-cell !important;
+                text-align: center !important;
+            }
+            .price-table td::before,
+            .container > table td::before { content: none !important; }
+
+            @page { size: A4 landscape; margin: 8mm; }
+            body { padding: 0 !important; background: #fff !important; }
+            .container {
+                max-width: none !important;
+                width: 100% !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                overflow: visible !important;
+                padding: 0 !important;
+            }
+            .table-wrapper { overflow: visible !important; border: none !important; }
+            .price-table { width: 100% !important; min-width: 0 !important; table-layout: auto !important; }
+            .price-table th, .price-table td {
+                white-space: normal !important;
+                word-break: break-word !important;
+                overflow-wrap: anywhere !important;
+                font-size: 11px !important;
+                padding: 6px 5px !important;
+            }
+            .price-table th:first-child,
+            .price-table td:first-child,
+            .price-table th:nth-child(4),
+            .price-table td:nth-child(4),
+            .price-table th:nth-child(5),
+            .price-table td:nth-child(5),
+            .price-table th:nth-child(6),
+            .price-table td:nth-child(6) {
+                width: auto !important;
+                min-width: 0 !important;
+            }
+            .btn-print, .btn-course { display: none !important; }
+            .info-grid { break-inside: avoid; page-break-inside: avoid; }
+        }
+
+    
+        .table-scroll-hint {
+            display: none;
+            margin: 0 0 0.75rem;
+            font-size: 0.82rem;
+            color: #7B6B6B;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .container {
+                padding: 1.1rem 0.9rem 1.4rem;
+                border-radius: 20px;
+            }
+
+            .company-name,
+            h1 {
+                font-size: 1.65rem;
+                line-height: 1.15;
+            }
+
+            .sub {
+                gap: 0.75rem;
+                font-size: 0.88rem;
+            }
+
+            .section-title {
+                font-size: 1.35rem;
+                line-height: 1.25;
+            }
+
+            .info-grid {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .contacts p,
+            .notes p {
+                align-items: flex-start;
+            }
+
+            .btn-print,
+            .btn-course {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .table-scroll-hint {
+                display: block;
+            }
+
+            .table-wrapper {
+                overflow: visible;
+                border: none;
+                background: transparent;
+            }
+
+            .price-table,
+            .container > table {
+                min-width: 0;
+                border: none;
+            }
+
+            .price-table thead,
+            .container > table thead {
+                display: none;
+            }
+
+            .price-table tbody tr,
+            .container > table tbody tr {
+                display: block;
+                margin-bottom: 0.85rem;
+                padding: 0.85rem 0.9rem;
+                border: 1px solid #E8DDD2;
+                border-radius: 16px;
+                background: #fff;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            }
+
+            .price-table tbody tr:hover td,
+            .container > table tbody tr:hover td {
+                background: transparent;
+            }
+
+            .price-table td,
+            .container > table td {
+                display: flex;
+                justify-content: space-between;
+                gap: 0.75rem;
+                align-items: flex-start;
+                padding: 0.45rem 0;
+                text-align: right;
+                border-bottom: 1px solid #F0E6DE;
+                white-space: normal;
+                word-break: break-word;
+            }
+
+            .price-table td:last-child,
+            .container > table td:last-child {
+                border-bottom: none;
+            }
+
+            .price-table td::before,
+            .container > table td::before {
+                content: attr(data-label);
+                flex: 0 0 42%;
+                max-width: 42%;
+                text-align: left;
+                font-weight: 600;
+                color: #5E4B6E;
+            }
+
+            .price-table td[data-label="Название курса / услуги"],
+            .container > table td[data-label="Название курса / услуги"] {
+                display: block;
+                text-align: left;
+                padding-top: 0;
+                margin-bottom: 0.35rem;
+                border-bottom: 1px dashed #E8DDD2;
+            }
+
+            .price-table td[data-label="Название курса / услуги"]::before,
+            .container > table td[data-label="Название курса / услуги"]::before {
+                display: block;
+                max-width: none;
+                margin-bottom: 0.35rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="company-name">Усадьба Вербицких</div>
+        <div class="sub">
+            <span><i class="fas fa-industry"></i> Промышленная безопасность</span>
+            <span><i class="fas fa-bolt"></i> Электробезопасность</span>
+            <span><i class="fas fa-temperature-low"></i> ТЭУ</span>
+        </div>
+    </div>
+
+    <div class="section-title"><i class="fas fa-shield-virus" style="margin-right: 12px;"></i> Промышленная безопасность. Электробезопасность. Теплоэнергетические установки.</div>
+    <p class="table-scroll-hint">На телефоне каждая позиция показана отдельной карточкой.</p>
+    <div class="table-wrapper">
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>Вид</th>
+                    <th>Подвид</th>
+                    <th>Название курса / услуги</th>
+                    <th>Кол-во часов</th>
+                    <th>Цена за 1 чел. (₽)</th>
+                    <th>Цена от 7 чел. (₽)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 1 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Требования промышленной безопасности. Электробезопасность. ТЭУ</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+
+<!-- 2 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Общие требования промышленной безопасности. А.1. Основы промышленной безопасности</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 3 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Б1. Требования промышленной безопасности в химической, нефтехимической и нефтеперерабатывающей промышленности</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 4 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Б2. Требования промышленной безопасности в нефтяной и газовой промышленности</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 5 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Требования промышленной безопасности в металлургической промышленности. Б.3.6 Доменное и сталеплавильное производство</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 6 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Требования промышленной безопасности в металлургической промышленности. Б.3.1 Литейное производство черных и цветных металлов</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 7 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Дополнительная профессиональная программа повышения квалификации "Требования промышленной безопасности в металлургической промышленности" Б.3</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 8 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Б4. Требования промышленной безопасности в горнорудной промышленности</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 9 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Требования промышленной безопасности в горнорудной промышленности. Б.4.2. Строительство, реконструкция, капитальный ремонт подземных сооружений</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 10 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Б5. Требования промышленной безопасности в области маркшейдерского обеспечения горных работ</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 11 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Требования по маркшейдерскому обеспечению безопасного ведения горных работ. Б.6.1. Маркшейдерское обеспечение безопасного ведения горных работ при осуществлении работ, связанных с пользованием недрами и их проектированием</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 12 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Б7.3. Требования промышленной безопасности на объектах газораспределения и газопотребления. Проектирование строительства, реконструкции, техническое перевооружение и капитальный ремонт сетей газораспределения и газопотребления.</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 13 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Б8. Требования промышленной безопасности к оборудованию, работающему под давлением, на опасных производственных объектах</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 14 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Требования промышленной безопасности к оборудованию, работающему под давлением. Б.8.3. Эксплуатация опасных производственных
+
+объектов, на которых используются сосуды, работающие под избыточным давлением.</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 15 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Б9. Требования промышленной безопасности к подъемным сооружениям</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 16 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Требования промышленной безопасности к подъемным сооружениям. Б.9.3. Эксплуатация опасных производственных объектов, на которых применяются подъемные сооружения, предназначенные для подъема и перемещения грузов</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 17 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Требования промышленной безопасности к подъемным сооружениям. Б.9.4. Эксплуатация опасных производственных объектов, на которых применяются подъемные сооружения, предназначенные для подъема и транспортировки людей</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 18 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Б10. Требования промышленной безопасности при транспортировании опасных веществ</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 19 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Б11. Требования промышленной безопасности на объектах хранения и переработки растительного сырья</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 20 Электробезопасность -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Электробезопасность. Требования нормативных документов в объеме, необходимом для работы в электроустановках с напряжением до и выше 1000 В и III группой по электробезопасности</td><td>28</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 21 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>IV группа по электробезопасности (для промышленных предприятий)</td><td>28</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 22 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Электробезопасность. Требования нормативных документов в объеме, необходимом для работы в электроустановках с напряжением до и выше 1000 В и IV группой по электробезопасности</td><td>28</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 23 ТЭУ -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Программа обучения по эксплуатации тепловых энергоустановок теплосетей</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+                <!-- 24 -->
+                <tr><td class="price-highlight">ДПО</td><td>ПК</td><td>Организация эксплуатации тепловых энергоустановок предприятия</td><td>72</td><td class="price-highlight">7 000</td><td class="price-highlight">3 500</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="info-grid">
+        <div class="contacts">
+            <h3 style="color: #5E4B6E; margin-bottom: 12px;"><i class="fas fa-phone-alt"></i> Свяжитесь с нами</h3>
+            <p><i class="fab fa-whatsapp"></i> <a href="tel:+7 978 535 04 07">+7 978 535 04 07</a> (WhatsApp)</p>
+            <p><i class="fab fa-telegram"></i> Max (Telegram)</p>
+            <p><i class="fas fa-envelope"></i> Vlstroi.kadr@gmail.com</p>
+            <p><i class="fas fa-globe"></i> https://moya-usadba.ru</p>
+        </div>
+        <div class="notes">
+            <h3 style="color: #5E4B6E; margin-bottom: 12px;"><i class="fas fa-file-signature"></i> Условия</h3>
+            <p><i class="fas fa-users"></i> Скидка при группе от 7 человек</p>
+            <p><i class="fas fa-clock"></i> Гибкий график обучения</p>
+            <p><i class="fas fa-file-contract"></i> Официальный договор, внесение данных в реестры ФИС ФРДО Минтруда. Присваивается удостоверение + свидетельство</p>
+            <div style="margin-top: 15px;">
+                <a href="#" class="btn-course" target="_blank"><i class="fas fa-calendar-check"></i> Записаться на курс</a>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <button class="btn-print" onclick="window.print();"><i class="fas fa-print"></i> Сохранить как PDF / Печать</button>
+    </div>
+    <footer>
+        © Усадьба Вербицких — промышленная безопасность, электробезопасность, ТЭУ. Актуальные цены.
+    </footer>
+</div>
+
+<script>
+(function () {
+    function labelTables(root) {
+        root.querySelectorAll("table").forEach(function (table) {
+            var headers = Array.prototype.map.call(
+                table.querySelectorAll("thead th"),
+                function (th) { return th.textContent.trim(); }
+            );
+            if (!headers.length) {
+                return;
+            }
+            table.querySelectorAll("tbody tr").forEach(function (row) {
+                Array.prototype.forEach.call(row.children, function (cell, index) {
+                    if (headers[index]) {
+                        cell.setAttribute("data-label", headers[index]);
+                    }
+                });
+            });
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () {
+            labelTables(document);
+        });
+    } else {
+        labelTables(document);
+    }
+})();
+</script>
+
+</body>
+</html>

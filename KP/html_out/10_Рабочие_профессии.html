@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Прайс-лист (Рабочие профессии) | Усадьба Вербицких</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #F9F6F2; font-family: 'Inter', sans-serif; color: #2E2A28; line-height: 1.4; padding: 2rem 1rem; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 32px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); overflow: hidden; padding: 2rem 1.8rem 2.5rem 1.8rem; }
+        .header { text-align: center; margin-bottom: 2.5rem; border-bottom: 2px solid #E6DDD2; padding-bottom: 1.5rem; }
+        .company-name { font-size: 2.4rem; font-weight: 600; letter-spacing: -0.02em; background: linear-gradient(135deg, #5E4B6E 0%, #9B7BB5 100%); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 0.5rem; }
+        .sub { color: #7B6B6B; font-size: 0.95rem; display: flex; justify-content: center; gap: 1.8rem; flex-wrap: wrap; }
+        .sub span i { color: #B39CD0; margin-right: 6px; }
+        .section-title { font-size: 1.9rem; font-weight: 600; margin: 1.8rem 0 1rem 0; padding-left: 0.5rem; border-left: 5px solid #B39CD0; color: #3D2B3F; }
+        .table-wrapper { overflow-x: auto; margin: 1.5rem 0 1rem 0; border-radius: 20px; border: 1px solid #EFE5DB; background: white; }
+        .price-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 900px; }
+        .price-table th, .price-table td { padding: 0.8rem 0.6rem; text-align: center; border-bottom: 1px solid #F0E6DE; }
+        .price-table th { background-color: #F5EFE9; color: #3D2B3F; font-weight: 600; border-bottom: 1px solid #E0D3C8; }
+        .price-table td:nth-child(3) { text-align: left; }
+        .price-table td.price-highlight { font-weight: 700; color: #7C5D8E; white-space: nowrap; }
+        .info-grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; margin: 2.5rem 0 1rem 0; background: #FEFCFA; padding: 1.5rem; border-radius: 24px; border: 1px solid #EFE5DB; }
+        .contacts { flex: 2; }
+        .notes { flex: 3; }
+        .contacts p, .notes p { margin: 0.7rem 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .contacts i, .notes i { width: 28px; color: #B39CD0; font-size: 1.2rem; }
+        .btn-print { display: inline-flex; align-items: center; gap: 10px; background: #B39CD0; border: none; padding: 12px 28px; border-radius: 60px; font-weight: 600; font-size: 1rem; color: #2E2A28; cursor: pointer; transition: all 0.2s ease; margin-top: 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+        footer { text-align: center; margin-top: 2.2rem; font-size: 0.75rem; color: #A9988C; border-top: 1px solid #EFE5DB; padding-top: 1.5rem; }
+    
+
+        @media print {
+            .table-scroll-hint { display: none !important; }
+            .price-table thead,
+            .container > table thead { display: table-header-group !important; }
+            .price-table tbody tr,
+            .container > table tbody tr {
+                display: table-row !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+            .price-table td,
+            .container > table td {
+                display: table-cell !important;
+                text-align: center !important;
+            }
+            .price-table td::before,
+            .container > table td::before { content: none !important; }
+
+            @page { size: A4 landscape; margin: 8mm; }
+            body { padding: 0 !important; background: #fff !important; }
+            .container {
+                max-width: none !important;
+                width: 100% !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                overflow: visible !important;
+                padding: 0 !important;
+            }
+            .table-wrapper { overflow: visible !important; border: none !important; }
+            .price-table { width: 100% !important; min-width: 0 !important; table-layout: auto !important; }
+            .price-table th, .price-table td {
+                white-space: normal !important;
+                word-break: break-word !important;
+                overflow-wrap: anywhere !important;
+                font-size: 11px !important;
+                padding: 6px 5px !important;
+            }
+            .price-table th:first-child,
+            .price-table td:first-child,
+            .price-table th:nth-child(4),
+            .price-table td:nth-child(4),
+            .price-table th:nth-child(5),
+            .price-table td:nth-child(5),
+            .price-table th:nth-child(6),
+            .price-table td:nth-child(6) {
+                width: auto !important;
+                min-width: 0 !important;
+            }
+            .btn-print, .btn-course { display: none !important; }
+            .info-grid { break-inside: avoid; page-break-inside: avoid; }
+        }
+
+    
+        .table-scroll-hint {
+            display: none;
+            margin: 0 0 0.75rem;
+            font-size: 0.82rem;
+            color: #7B6B6B;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .container {
+                padding: 1.1rem 0.9rem 1.4rem;
+                border-radius: 20px;
+            }
+
+            .company-name,
+            h1 {
+                font-size: 1.65rem;
+                line-height: 1.15;
+            }
+
+            .sub {
+                gap: 0.75rem;
+                font-size: 0.88rem;
+            }
+
+            .section-title {
+                font-size: 1.35rem;
+                line-height: 1.25;
+            }
+
+            .info-grid {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .contacts p,
+            .notes p {
+                align-items: flex-start;
+            }
+
+            .btn-print,
+            .btn-course {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .table-scroll-hint {
+                display: block;
+            }
+
+            .table-wrapper {
+                overflow: visible;
+                border: none;
+                background: transparent;
+            }
+
+            .price-table,
+            .container > table {
+                min-width: 0;
+                border: none;
+            }
+
+            .price-table thead,
+            .container > table thead {
+                display: none;
+            }
+
+            .price-table tbody tr,
+            .container > table tbody tr {
+                display: block;
+                margin-bottom: 0.85rem;
+                padding: 0.85rem 0.9rem;
+                border: 1px solid #E8DDD2;
+                border-radius: 16px;
+                background: #fff;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            }
+
+            .price-table tbody tr:hover td,
+            .container > table tbody tr:hover td {
+                background: transparent;
+            }
+
+            .price-table td,
+            .container > table td {
+                display: flex;
+                justify-content: space-between;
+                gap: 0.75rem;
+                align-items: flex-start;
+                padding: 0.45rem 0;
+                text-align: right;
+                border-bottom: 1px solid #F0E6DE;
+                white-space: normal;
+                word-break: break-word;
+            }
+
+            .price-table td:last-child,
+            .container > table td:last-child {
+                border-bottom: none;
+            }
+
+            .price-table td::before,
+            .container > table td::before {
+                content: attr(data-label);
+                flex: 0 0 42%;
+                max-width: 42%;
+                text-align: left;
+                font-weight: 600;
+                color: #5E4B6E;
+            }
+
+            .price-table td[data-label="Название курса / услуги"],
+            .container > table td[data-label="Название курса / услуги"] {
+                display: block;
+                text-align: left;
+                padding-top: 0;
+                margin-bottom: 0.35rem;
+                border-bottom: 1px dashed #E8DDD2;
+            }
+
+            .price-table td[data-label="Название курса / услуги"]::before,
+            .container > table td[data-label="Название курса / услуги"]::before {
+                display: block;
+                max-width: none;
+                margin-bottom: 0.35rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="company-name">Усадьба Вербицких</div>
+        <div class="sub">
+            <span><i class="fas fa-tools"></i> Рабочие профессии</span>
+            <span><i class="fas fa-chalkboard-user"></i> Обучение + услуги</span>
+            <span><i class="fas fa-hand-holding-heart"></i> Гарантия качества</span>
+        </div>
+    </div>
+
+    <div class="section-title"><i class="fas fa-helmet-safety" style="margin-right: 12px;"></i> Рабочие профессии</div>
+    <p class="table-scroll-hint">На телефоне каждая позиция показана отдельной карточкой.</p>
+    <div class="table-wrapper">
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>Вид</th>
+                    <th>Подвид</th>
+                    <th>Название курса / услуги</th>
+                    <th>Кол-во часов</th>
+                    <th>Цена от 7 чел. (₽)</th>
+                    <th>Цена за 1 чел. (₽)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Слесарь по ремонту технологических установок</td><td>180</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Слесарь по топливной аппаратуре</td><td>156</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Слесарь по эксплуатации и ремонту газового оборудования</td><td>80</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Слесарь-инструментальщик</td><td>172</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Слесарь-сантехник</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Слесарь-электрик по ремонту электрооборудования</td><td>60</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Столяр</td><td>80</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Трубопроводчик линейный</td><td>122</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Электромеханик по лифтам</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Электромеханик по средствам автоматики и приборам технологического</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Электромонтажник-наладчик</td><td>192</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Электромонтер охранно-пожарной сигнализации</td><td>224</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Электромонтер по испытаниям и измерениям</td><td>220</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Электромонтер по обслуживанию буровых</td><td>144</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Вышкомонтажник</td><td>180</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Контролер малярных работ</td><td>192</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Монтажник наружных трубопроводов инженерных сетей</td><td>180</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Шпаклевщик</td><td>190</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Специалист по маникюру</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Косметик</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Сортировщик (упаковщик
+
+) теплоизоляционных изделий</td><td>256</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Кастелянша</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Статистик</td><td>256</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Диспетчер пожарной связи</td><td>250</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Приемосдатчик груза и багажа</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Бригадир (освобожденный) организаций железнодорожного транспорта</td><td>360</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+
+                <!-- === НОВЫЕ ПРОФЕССИИ ИЗ IMG_7104 === -->
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Слесарь механосборочных работ</td><td>120</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Резчик труб и заготовок</td><td>350</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Строгальщик</td><td>200</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Слесарь по обслуживанию и ремонту грузоподъемных и перегрузочных машин</td><td>310</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Облицовщик-плиточник</td><td>270</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Слесарь - ремонтник механического, гидравлического и пневматического оборудования</td><td>320</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Кранщик башенного крана</td><td>220</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Оператор манипулятора</td><td>240</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Штукатур</td><td>190</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Шихтовщик</td><td>180</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Дефектоскопист рентгено-гаммаграфирования</td><td>206</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Сестра-хозяйка</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Монтажник технологического трубопровода</td><td>196</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Дефектоскопист по магнитному и ультразвуковому контролю</td><td>250</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Социальный работник</td><td>160</td><td class="price-highlight">4 00
+
+0</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Санитар</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Медицинский регистратор</td><td>488</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Младшая медицинская сестра по уходу за больными</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Токарь-универсал</td><td>280</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Станочник широкого профиля</td><td>360</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Буфетчик</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Резчик на пилах, ножовках и станках</td><td>360</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Наждачник</td><td>250</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Дефектоскопист по визуальному и измерительному контролю</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Сварщик</td><td>250</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Каменщик</td><td>256</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Изолировщик-пленочник</td><td>260</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Электроэрозионист</td><td>120</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Монтажник каркасно-обшивных конструкций</td><td>180</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист насосных установок</td><td>230</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Чистильщик металла, отливок, изделий и деталей</td><td>320</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Дробеструйщик</td><td>320</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Монтажник приборов и аппаратуры автоматического контроля, регулирования и управления</td><td>220</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Электромонтажник по распределительным устройствам и вторичным цепям</td><td>220</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист телефара</td><td>180</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Сварщик дуговой сварки неплавящимся электродо
+
+м в защитном газе</td><td>226</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист электросварочного передвижного агрегата с двигателем внутреннего сгорания</td><td>220</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Аккумуляторщик</td><td>80</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Аппаратчик очистки сточных вод</td><td>220</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Аппаратчик химводоочистки</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Дорожный рабочий</td><td>196</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Жестянщик</td><td>76</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Заточник</td><td>58</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Контролер станочных и слесарных работ</td><td>80</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Лаборант химического анализа</td><td>260</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Оператор по диспетчерскому обслуживанию лифтов</td><td>120</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Лифтер</td><td>172</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист автожмобуса</td><td>180</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист автогрейдера</td><td>280</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист агрегатов по обслуживанию нефтегазопромыслового оборудования</td><td>104</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист дорожно-транспортных машин</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист катка самоходного с гладкими вальцами</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист паровой передвижной депарафинизационной установки</td><td>150</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист передвижного компрессора</td><td>172</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист промывочного агрегата</td><td>180</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист технологических насосов</td><td>138</td><td class="price-highlight">4 000</td><td class="price-highli
+
+ght">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист укладчика асфальтобетона</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Машинист электростанции передвижной</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Моторист бетоносмесительных установок</td><td>180</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Моторист цементировочного агрегата</td><td>180</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Наладчик контрольно-измерительных приборов и автоматики</td><td>190</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Оператор газораспределительной станции</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Оператор заправочных станций</td><td>120</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Оператор котельной (установки)</td><td>164</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+                <tr><td class="price-highlight">ПО</td><td>—</td><td>Оператор окрасочно-сушильной линии и агрегата</td><td>160</td><td class="price-highlight">4 000</td><td class="price-highlight">6 000</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="info-grid">
+        <div class="contacts">
+            <h3 style="color: #5E4B6E; margin-bottom: 12px;"><i class="fas fa-phone-alt"></i> Свяжитесь с нами</h3>
+            <p><i class="fab fa-whatsapp"></i> <a href="tel:+7 978 535 04 07">+7 978 535 04 07</a> (WhatsApp)</p>
+            <p><i class="fab fa-telegram"></i> Max (Telegram)</p>
+            <p><i class="fas fa-envelope"></i> Vlstroi.kadr@gmail.com</p>
+            <p><i class="fas fa-globe"></i> https://moya-usadba.ru</p>
+        </div>
+        <div class="notes">
+            <h3 style="color: #5E4B6E; margin-bottom: 12px;"><i class="fas fa-file-signature"></i> Условия</h3>
+            <p><i class="fas fa-users"></i> Скидка при группе от 7 человек</p>
+            <p><i class="fas fa-clock"></i> Гибкий график обучения</p>
+            <p><i class="fas fa-file-contract"></i> Официальный договор, внесение данных в реестры ФИС ФРДО Минтруда. Присваивается удостоверение + свидетельство</p>
+            <div style="margin-top: 15px;">
+                <a href="#" class="btn-course" target="_blank"><i class="fas fa-calendar-check"></i> Записаться на курс</a>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <button class="btn-print" onclick="window.print();"><i class="fas fa-print"></i> Сохранить как PDF / Печать</button>
+    </div>
+    <footer>
+        © Усадьба Вербицких — обучение рабочим профессиям. Актуальные цены.
+    </footer>
+</div>
+
+<script>
+(function () {
+    function labelTables(root) {
+        root.querySelectorAll("table").forEach(function (table) {
+            var headers = Array.prototype.map.call(
+                table.querySelectorAll("thead th"),
+                function (th) { return th.textContent.trim(); }
+            );
+            if (!headers.length) {
+                return;
+            }
+            table.querySelectorAll("tbody tr").forEach(function (row) {
+                Array.prototype.forEach.call(row.children, function (cell, index) {
+                    if (headers[index]) {
+                        cell.setAttribute("data-label", headers[index]);
+                    }
+                });
+            });
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () {
+            labelTables(document);
+        });
+    } else {
+        labelTables(document);
+    }
+})();
+</script>
+
+</body>
+</html>

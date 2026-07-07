@@ -1,0 +1,60 @@
+import{c as R}from"./emailVerification.DC7SHvwr.js";import{s as M}from"./phoneValidation.DAF5bxOs.js";document.addEventListener("DOMContentLoaded",function(){const h="https://adminapi.blackridgeresearch.com";let m,u,g=null;const l=document.getElementById("download-form");if(!l)return;const v=l.querySelector("#sample-email"),p=v?R(v,l.querySelector("#sampleEmailValidation"),h):null;function x(){return m?Promise.resolve(m):u||(u=M("sample-phone","sample-mobile",{apiBaseUrl:h}).then(e=>(e&&(m=e.iti,g=e.validator),m)).catch(()=>null),u)}function k(){requestAnimationFrame(()=>{x().then(e=>{e&&e.setCountry("in")})})}l.querySelector("#sample-phone")?.addEventListener("focus",()=>{x()},{once:!0}),x().then(e=>{e&&e.setCountry("in")});const y={".sample-fname":/^[a-zA-Z' -]*$/,".sample-phone":/^[0-9+()\-\s]*$/,".sample-email":/^[a-zA-Z0-9@._%+-]*$/,".sample-message":/^[a-zA-Z0-9.,!? \n\r]*$/};let w=window.BLACKLISTED_DOMAINS||["gmail.com","yahoo.com","hotmail.com"];Object.keys(y).forEach(e=>{const t=l.querySelector(e);if(t){const o=y[e];t.addEventListener("keydown",function(a){const s=["Backspace","Delete","ArrowLeft","ArrowRight","Tab","Home","End"];a.ctrlKey||a.metaKey||s.includes(a.key)||o.test(a.key)||a.preventDefault()}),t.addEventListener("input",function(){q(this,o),C(this)}),t.addEventListener("paste",function(a){I(a,o)}),t.addEventListener("blur",function(){const a=this.value.trim(),s=this.nextElementSibling,i=s&&s.classList.contains("alert-badge");this.classList.contains("sample-message")||(a===""?n(this,"This field is required."):i&&s.textContent==="This field is required."&&s.remove())})}});function q(e,t){const o=e.value,a=t.test(o),s=e.nextElementSibling,i=s&&s.classList.contains("alert-badge");if(a)e.classList.remove("invalid-input"),i&&s.remove();else{const r=o.replace(new RegExp(`[^${t.toString().slice(2,-2)}]`,"g"),"");e.value!==r&&(e.value=r),e.classList.add("invalid-input"),i||n(e,"Special characters not allowed!")}}function I(e,t){const o=e.clipboardData.getData("text");t.test(o)||(e.preventDefault(),n(e.target,"Pasted text contains invalid characters!"))}function C(e){const t=e.value.trim(),o=e.nextElementSibling;if(!t.includes("@"))return;const a=t.split("@")[1].toLowerCase();w.includes(a)?n(e,"Kindly enter your work email (e.g., yourname@company.com) to continue. Personal emails aren't allowed."):o&&o.classList.contains("alert-badge")&&o.remove()}function E(e){const t=e.split("@")[1]?.toLowerCase();return t&&w.includes(t)}const S=l.querySelector("#sample-submit"),P=l.querySelector("#sampleloading");function _(){const e=new FormData;let t=!0;const o=l.querySelector(".sample-fname").value.trim(),a=l.querySelector(".sample-email").value.trim(),s=l.querySelector(".sample-message")?.value.trim()||"",i=l.querySelector("#sample-mobileCode").value.trim(),r=l.querySelector("#sample-mobileFullNumber").value.trim(),N=l.querySelector("#sample-mobileName").value.trim(),T=l.querySelector("#sample-mobileIso").value.trim();if(l.querySelectorAll(".alert-badge").forEach(b=>b.remove()),S.disabled=!0,S.style.display="none",P.style.display="block",o===""?(t=!1,n(".sample-fname","Please Enter Name")):y[".sample-fname"].test(o)||(t=!1,n(".sample-fname","Special characters not allowed!")),r===""&&(t=!1,n("#sample-phone","Please enter Number")),a===""?(t=!1,n(".sample-email","Please Enter Email")):/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(a)?E(a)&&(t=!1,n(".sample-email","Please enter your work email (e.g., yourname@company.com). Personal emails are not allowed.")):(t=!1,n(".sample-email","Invalid email format")),t){let b=function(c){const d=document.cookie.match(new RegExp("(^| )"+c+"=([^;]+)"));return d?decodeURIComponent(d[2]):null};e.append("name",o),e.append("phone",r),e.append("message",s),e.append("email",a),e.append("page",`Reports - ${document.title}`),e.append("interest",""),e.append("page_url",window.location.href),e.append("source",""),e.append("phone_code",i),e.append("country_code",N),e.append("mobile_iso",T),e.append("userdata_type",""),e.append("status",""),e.append("request_type","sample_download"),["gclid","utm_source","utm_medium","utm_campaign","utm_term","utm_content"].forEach(c=>{const d=b(c);d&&e.append(c,d)});const L=p?.getPartialId?.();L&&e.append("partial_id",String(L)),fetch(`${h}/contact-requests`,{method:"POST",body:e}).then(c=>{c.ok?(localStorage.setItem("reportssampledow","true"),A(o,a,r)):B("Something went wrong.")}).catch(c=>{console.error("Error adding data:",c)})}}function n(e,t){const o=typeof e=="string"?l.querySelector(e):e;if(!o)return;const a=o.nextElementSibling;if(a&&a.classList.contains("alert-badge")){a.textContent=t;return}const s=document.createElement("p");s.className="alert-badge",s.style.color="red",s.style.fontSize="12px",s.style.lineHeight="1.4",s.textContent=t,o.after(s)}function A(e,t,o){const a=document.getElementById("popupfooter"),s=a.querySelector(".relative"),i=document.getElementById("popup-down");i&&i.classList.add("hidden"),s.innerHTML=`
+	            <div class="px-8 py-6 text-center w-full max-w-lg relative">
+					<div id="close-popup-footer" class="absolute top-4 right-5 font-bold text-black hover:text-gray-600 cursor-pointer">
+		                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="m7.05 5.636l4.95 4.95l4.95-4.95l1.414 1.414l-4.95 4.95l4.95 4.95l-1.415 1.414l-4.95-4.95l-4.949 4.95l-1.414-1.414l4.95-4.95l-4.95-4.95L7.05 5.636Z"/></svg>
+		            </div>
+	                <dotlottie-player
+	                    src="/dotlottie/tqsuccess.lottie"
+	                    background="transparent"
+	                    speed="1"
+	                    style="width: 100px; height: 100px; margin: auto;"
+	                    loop autoplay>
+	                </dotlottie-player>
+	                <h4 class="md:text-2xl text-1xl font-semibold text-black mb-1">
+      You're in! Your Sample is on the way.
+    </h4>
+				<p class="text-sm text-gray-600">We've received your request and are getting it ready.</p>
+				<h6 class="text-base text-left font-semibold text-black mt-2">What Happens Next?</h6>
+	<div class="flex items-start gap-2 mt-2 text-left">
+		<p class="text-sm text-blue-600 bg-blue-100 w-7 h-7 p-3 flex items-center justify-center rounded-full">1</p>
+		<div>
+			<p class="text-black font-bold text-sm">Profile Verification</p>
+			<p class="text-gray-600 text-medium text-[13px] leading-5 mt-1">We'll review your details to confirm it's a genuine business request and avoid sending samples to bots, fake accounts, spam, or non-business inquiries.</p>
+		</div>
+	</div>
+	<div class="flex items-start gap-2 mt-2 text-left">
+		<p class="text-sm text-blue-600 bg-blue-100 w-7 h-7 p-3 flex items-center justify-center rounded-full">2</p>
+		<div>
+			<p class="text-black font-bold text-sm">Sample Delivery</p>
+			<p class="text-gray-600 text-medium text-[13px] leading-5 mt-1">Your sample will be sent to your inbox within <span class="text-gray-600 font-bold text-xs">24-48 hours.</span></p>
+
+			<p class="text-blue-600 text-[12px]"><i class="ri-phone-line"></i> Need it sooner? Call us at +1 (917) 993 7467</p>
+		
+		</div>
+	</div>
+	<div class="flex items-start gap-2 mt-2 text-left">
+		<p class="text-sm text-blue-600 bg-blue-100 w-7 h-7 p-3 flex items-center justify-center rounded-full">3</p>
+		<div>
+			
+			<p class="text-black font-bold text-sm">Explore Next Steps</p>
+			<p class="text-gray-600 text-medium text-[13px] leading-5 mt-1">Want deeper insights or tailored research? Our analysts can prepare a <span class="font-bold text-gray-600 text-sm">sample customized to your exact needs.</span></p>
+		</div>
+	</div>
+	<div  class="relative mt-2">
+		<span class="absolute bottom-6 right-0 rounded-full bg-green-600 px-2 py-[1px] text-[8px] font-normal text-white">Recommended</span>
+		<button id="popup-schedule-call-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-[12px] font-bold py-2 px-4 rounded"><i class="ri-calendar-line"></i> Schedule Your Call Now</button>
+		</div>
+     <p class="mt-2 text-xs text-gray-500 pb-3">
+        Get a customized sample, ask questions, get a proposal, and explore insights aligned with your business goals.
+      </p>
+          
+	            </div>
+	        `,a.classList.remove("hidden"),document.getElementById("close-popup-footer").addEventListener("click",function(){a.classList.add("hidden"),window.location.reload()}),document.getElementById("popup-schedule-call-btn").addEventListener("click",()=>{console.log(e,t,o);const r=`https://calendly.com/sujith-blackridge/30min?name=${encodeURIComponent(e)}&email=${encodeURIComponent(t)}&a2=${encodeURIComponent(o)}`;window.location.href=r})}function B(e){const t=document.getElementById("popupfooter"),o=t.querySelector(".relative"),a=document.getElementById("popup-down");a&&a.classList.add("hidden"),o.innerHTML=`
+	            <div class="p-4 md:p-8 text-center">
+	                <h3 class="text-xl md:text-2xl font-bold text-red-600">Oops! Something went wrong.</h3>
+	                <p class="mt-2 text-gray-600 text-sm md:text-base">${e}</p>
+	                <button id="close-popup-footer" class="mt-6 w-full md:w-auto px-6 py-2 rounded bg-gray-700 text-white">
+	                    Close
+	                </button>
+	            </div>
+	        `,t.classList.remove("hidden"),document.getElementById("close-popup-footer").addEventListener("click",function(){t.classList.add("hidden")})}l.addEventListener("submit",async function(e){e.preventDefault(),l.querySelectorAll(".alert-badge").forEach(i=>i.remove());let t=!1;const o=l.querySelector(".sample-fname").value.trim(),a=l.querySelector(".sample-email").value.trim(),s=l.querySelector("#sample-phone").value.trim();if(o||(n(".sample-fname","Please enter your name"),t=!0),a?E(a)&&(n(".sample-email","Please enter your work email (e.g., yourname@company.com). Personal emails are not allowed."),t=!0):(n(".sample-email","Please enter your work email"),t=!0),s||(n("#sample-phone","Please enter your phone number"),t=!0),!t){if(p&&(p.reset(),await p.verify(),!p.isVerified())){const i=l.querySelector("#sampleEmailValidation");i&&i.textContent.trim()||l.querySelector(".alert-badge")||n(".sample-email","We couldn't verify this email. Please check and try again.");return}g&&!await g.validatePhoneNumber()||_()}});const f=document.getElementById("popup-down"),D=new MutationObserver(()=>{f&&!f.classList.contains("hidden")&&k()});f&&D.observe(f,{attributes:!0,attributeFilter:["class"]})});

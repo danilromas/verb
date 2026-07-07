@@ -1,11 +1,11 @@
 "use client"
 
+import { useState } from "react"
+import { CheckCircle2, Mail, MapPin, Phone, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Phone, Mail, MapPin, Send, CheckCircle2 } from "lucide-react"
-import { useState } from "react"
+import { Textarea } from "@/components/ui/textarea"
 
 export function ContactSection() {
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -17,111 +17,105 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-24 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-muted/30 rounded-[48px] p-8 md:p-16 border border-border/50 relative overflow-hidden">
-            {/* Background elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-            
-            <div className="grid lg:grid-cols-2 gap-16 relative z-10">
-              <div>
-                <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">Начните свой проект сегодня</h2>
-                <p className="text-muted-foreground text-lg mb-10 leading-relaxed">
-                  Оставьте заявку, и наш менеджер свяжется с вами в течение 30 минут для обсуждения деталей и предварительного расчета.
-                </p>
+    <section id="contact" className="py-24">
+      <div className="section-shell">
+        <div className="section-card overflow-hidden p-8 md:p-10 xl:p-14">
+          <div className="grid gap-10 xl:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <span className="eyebrow">Финальный контакт</span>
+              <h2 className="mt-6 text-3xl font-semibold tracking-tight text-[var(--brand-ink)] md:text-5xl">
+                Обсудим объект, формат работы и предварительный сценарий реализации.
+              </h2>
+              <p className="mt-6 text-lg leading-8 text-muted-foreground">
+                Здесь новый сайт должен завершаться не generic-формой, а ощущением личного контакта с сильной командой.
+                Поэтому блок собран как консультационная точка входа.
+              </p>
 
-                <div className="space-y-8">
-                  <div className="flex items-center gap-6 group">
-                    <div className="w-14 h-14 rounded-2xl bg-background border border-border flex items-center justify-center group-hover:border-primary transition-colors">
-                      <Phone className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">ГОРЯЧАЯ ЛИНИЯ</p>
-                      <a href="tel:+79785350407" className="text-xl font-bold text-foreground hover:text-primary transition-colors">+7 (978) 535-04-07</a>
+              <div className="mt-10 space-y-5">
+                {[
+                  { icon: Phone, label: "Телефон", value: "+7 (978) 535-04-07", href: "tel:+79785350407" },
+                  { icon: Mail, label: "Email", value: "info@verbitsky-estate.ru", href: "mailto:info@verbitsky-estate.ru" },
+                  { icon: MapPin, label: "Офис", value: "Евпатория, ул. Эскадронная 11, офис 8" },
+                ].map((item) => (
+                  <div key={item.label} className="rounded-[1.5rem] border border-border/70 bg-white/70 p-5">
+                    <div className="flex gap-4">
+                      <div className="rounded-2xl border border-border/70 bg-white/80 p-3 text-primary">
+                        <item.icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">{item.label}</div>
+                        {item.href ? (
+                          <a href={item.href} className="mt-2 block text-lg font-semibold text-[var(--brand-ink)] transition-colors hover:text-primary">
+                            {item.value}
+                          </a>
+                        ) : (
+                          <p className="mt-2 text-lg font-semibold text-[var(--brand-ink)]">{item.value}</p>
+                        )}
+                      </div>
                     </div>
                   </div>
+                ))}
+              </div>
+            </div>
 
-                  <div className="flex items-center gap-6 group">
-                    <div className="w-14 h-14 rounded-2xl bg-background border border-border flex items-center justify-center group-hover:border-primary transition-colors">
-                      <Mail className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">EMAIL</p>
-                      <a href="mailto:info@verbitsky-estate.ru" className="text-xl font-bold text-foreground hover:text-primary transition-colors">info@verbitsky-estate.ru</a>
-                    </div>
+            <div className="rounded-[2rem] border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(244,240,234,0.92))] p-6 md:p-8">
+              {isSubmitted ? (
+                <div className="flex min-h-[28rem] flex-col items-center justify-center text-center">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-500/10">
+                    <CheckCircle2 className="h-10 w-10 text-green-600" />
                   </div>
-
-                  <div className="flex items-center gap-6 group">
-                    <div className="w-14 h-14 rounded-2xl bg-background border border-border flex items-center justify-center group-hover:border-primary transition-colors">
-                      <MapPin className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">ОФИС</p>
-                      <p className="text-xl font-bold text-foreground">Республика Крым, г. Евпатория, ул. Эскадронная 11 офис 8</p>
-                    </div>
-                  </div>
+                  <h3 className="mt-6 text-2xl font-semibold text-[var(--brand-ink)]">Заявка принята</h3>
+                  <p className="mt-3 max-w-md text-base leading-7 text-muted-foreground">
+                    Мы свяжемся с вами в ближайшее время и обсудим подходящий формат работы по объекту.
+                  </p>
                 </div>
-              </div>
-
-              <div className="bg-background p-8 md:p-10 rounded-[32px] border border-border/50 shadow-xl shadow-black/5">
-                {isSubmitted ? (
-                  <div className="h-full flex flex-col items-center justify-center text-center py-12 animate-in fade-in zoom-in duration-500">
-                    <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mb-6">
-                      <CheckCircle2 className="w-10 h-10 text-green-500" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-foreground mb-4">Заявка принята!</h3>
-                    <p className="text-muted-foreground">Мы свяжемся с вами в ближайшее время. Спасибо за доверие!</p>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">Старт проекта</div>
+                    <h3 className="mt-3 text-2xl font-semibold text-[var(--brand-ink)]">Кратко опишите задачу, а мы предложим маршрут реализации.</h3>
                   </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Ваше имя</label>
-                        <Input placeholder="Иван Иванов" className="h-14 rounded-xl border-border bg-muted/20" required />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Телефон</label>
-                        <Input placeholder="+7 (___) ___-__-__" className="h-14 rounded-xl border-border bg-muted/20" required />
-                      </div>
-                    </div>
 
+                  <div className="grid gap-5 md:grid-cols-2">
                     <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Тип услуги</label>
-                      <Select>
-                        <SelectTrigger className="h-14 rounded-xl border-border bg-muted/20">
-                          <SelectValue placeholder="Выберите категорию" />
-                        </SelectTrigger>
-                        <SelectContent className="rounded-xl">
-                          <SelectItem value="construction">Строительство домов</SelectItem>
-                          <SelectItem value="renovation">Ремонт и отделка</SelectItem>
-                          <SelectItem value="engineering">Инженерные системы</SelectItem>
-                          <SelectItem value="design">Дизайн интерьеров</SelectItem>
-                          <SelectItem value="realestate">Недвижимость</SelectItem>
-                          <SelectItem value="education">Обучение</SelectItem>
-                          <SelectItem value="consultation">Консультация</SelectItem>
-                          <SelectItem value="tech_rent">Аренда спецтехники</SelectItem>
-                          <SelectItem value="other">Другое</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <label className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Имя</label>
+                      <Input required placeholder="Как к вам обращаться" className="h-14 rounded-xl bg-white/80" />
                     </div>
-
                     <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Комментарий (необязательно)</label>
-                      <Textarea placeholder="Краткое описание задачи..." className="min-h-[120px] rounded-xl border-border bg-muted/20 resize-none" />
+                      <label className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Телефон</label>
+                      <Input required placeholder="+7 (___) ___-__-__" className="h-14 rounded-xl bg-white/80" />
                     </div>
+                  </div>
 
-                    <Button type="submit" className="w-full h-14 rounded-xl text-lg font-bold shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
-                      Отправить заявку
-                      <Send className="w-5 h-5 ml-2" />
-                    </Button>
-                    
-                    <p className="text-[10px] text-center text-muted-foreground">
-                      Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности и обработкой персональных данных.
-                    </p>
-                  </form>
-                )}
-              </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Направление</label>
+                    <Select>
+                      <SelectTrigger className="h-14 rounded-xl bg-white/80">
+                        <SelectValue placeholder="Что вас интересует" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="architecture">Архитектура и проектирование</SelectItem>
+                        <SelectItem value="construction">Строительство</SelectItem>
+                        <SelectItem value="interiors">Ремонт и интерьер</SelectItem>
+                        <SelectItem value="engineering">Инженерные системы</SelectItem>
+                        <SelectItem value="smart">Умный дом</SelectItem>
+                        <SelectItem value="landscape">Благоустройство</SelectItem>
+                        <SelectItem value="docs">Документация и согласования</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Комментарий</label>
+                    <Textarea className="min-h-[160px] rounded-xl bg-white/80" placeholder="Тип объекта, стадия проекта, город, ориентиры по задачам и срокам" />
+                  </div>
+
+                  <Button type="submit" className="h-14 w-full rounded-xl text-base font-semibold">
+                    Отправить запрос
+                    <Send className="ml-2 h-5 w-5" />
+                  </Button>
+                </form>
+              )}
             </div>
           </div>
         </div>

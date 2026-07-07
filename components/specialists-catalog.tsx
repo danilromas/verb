@@ -1,194 +1,49 @@
 "use client"
 
-import { Star, MessageSquare, Filter, Search, User } from "lucide-react"
-import { useState } from "react"
+import Link from "next/link"
+import { ArrowRight, BadgeCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-
-const scrollToContact = () => {
-  const element = document.getElementById("contact")
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth" })
-  }
-}
-
-const categories = ["Все", "Строительство", "Ремонт", "Инженерия", "Проектирование", "Дизайн"]
-
-const specialists = [
-  {
-    id: 1,
-    name: "Алексей Соколов",
-    specialization: "Ведущий инженер-строитель",
-    category: "Строительство",
-    rating: 4.9,
-    reviews: 124,
-    image: "/placeholder-user.jpg",
-    price: "от 1500 ₽/час",
-  },
-  {
-    id: 2,
-    name: "Марина Волкова",
-    specialization: "Дизайнер интерьеров",
-    category: "Дизайн",
-    rating: 4.8,
-    reviews: 86,
-    image: "/placeholder-user.jpg",
-    price: "от 2500 ₽/м²",
-  },
-  {
-    id: 3,
-    name: "Игорь Кузнецов",
-    specialization: "Мастер отделочных работ",
-    category: "Ремонт",
-    rating: 5.0,
-    reviews: 215,
-    image: "/placeholder-user.jpg",
-    price: "от 800 ₽/м²",
-  },
-  {
-    id: 4,
-    name: "Дмитрий Морозов",
-    specialization: "Специалист по умным домам",
-    category: "Инженерия",
-    rating: 4.7,
-    reviews: 54,
-    image: "/placeholder-user.jpg",
-    price: "от 3000 ₽/выезд",
-  },
-  {
-    id: 5,
-    name: "Елена Белова",
-    specialization: "Архитектор-проектировщик",
-    category: "Проектирование",
-    rating: 4.9,
-    reviews: 92,
-    image: "/placeholder-user.jpg",
-    price: "от 1000 ₽/м²",
-  },
-  {
-    id: 6,
-    name: "Виктор Громов",
-    specialization: "Электромонтажник",
-    category: "Инженерия",
-    rating: 4.8,
-    reviews: 143,
-    image: "/placeholder-user.jpg",
-    price: "от 1200 ₽/точка",
-  },
-]
+import { leadTeam } from "@/lib/site-data"
 
 export function SpecialistsCatalog() {
-  const [activeCategory, setActiveCategory] = useState("Все")
-
-  const filteredSpecialists = activeCategory === "Все" 
-    ? specialists 
-    : specialists.filter(s => s.category === activeCategory)
-
   return (
-    <section id="specialists" className="py-24 bg-muted/30">
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            <div className="max-w-xl">
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">Каталог специалистов</h2>
-              <p className="text-muted-foreground text-lg">
-                Выбирайте проверенных профессионалов из нашего штата для ваших задач или доверьте подбор нашей системе. Все специалисты работают напрямую с нами.
-              </p>
-            </div>
-            <div className="flex items-center gap-3">
-              <Button variant="outline" className="rounded-xl h-12 gap-2">
-                <Filter className="w-4 h-4" />
-                Фильтры
-              </Button>
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input 
-                  placeholder="Поиск по имени или навыку" 
-                  className="pl-10 h-12 rounded-xl w-full md:w-[300px] border-border bg-background"
-                />
-              </div>
-            </div>
+    <section id="specialists" className="py-24">
+      <div className="section-shell">
+        <div className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <span className="eyebrow">Команда</span>
+            <h2 className="mt-6 text-3xl font-semibold tracking-tight text-[var(--brand-ink)] md:text-5xl">
+              Кураторская команда вокруг каждого проекта, а не случайный набор исполнителей.
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-muted-foreground">
+              Мы сознательно переводим этот блок из формата маркетплейса в формат leadership-команды: у проекта есть
+              архитектурная, строительная, инженерная и клиентская линия ответственности.
+            </p>
           </div>
+          <Button asChild size="lg" variant="outline" className="h-14 rounded-xl border-border/80 bg-white/60 px-8">
+            <Link href="/catalog">
+              Все направления и роли
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+        </div>
 
-          {/* Category Pills */}
-          <div className="flex flex-wrap gap-2 mb-10">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 border ${
-                  activeCategory === cat 
-                    ? "bg-primary text-primary-foreground border-primary" 
-                    : "bg-background text-muted-foreground border-border hover:border-primary/40 hover:text-primary"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          {/* Specialists Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredSpecialists.map((specialist) => (
-              <div 
-                key={specialist.id} 
-                className="group bg-background border border-border/60 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 hover:border-primary/20 transition-all duration-500"
-              >
-                <div className="p-6">
-                  <div className="flex gap-4 mb-6">
-                    <div className="w-20 h-20 rounded-2xl bg-muted overflow-hidden flex items-center justify-center flex-shrink-0">
-                      <User className="w-10 h-10 text-muted-foreground/40" />
-                    </div>
-                    <div className="flex flex-col justify-center">
-                      <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                        {specialist.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">{specialist.specialization}</p>
-                      <div className="flex items-center gap-2 mt-2">
-                        <div className="flex items-center gap-1 text-yellow-500">
-                          <Star className="w-4 h-4 fill-current" />
-                          <span className="text-sm font-bold">{specialist.rating}</span>
-                        </div>
-                        <div className="flex items-center gap-1 text-muted-foreground">
-                          <MessageSquare className="w-3 h-3" />
-                          <span className="text-[10px] font-medium uppercase tracking-wider">{specialist.reviews} отзывов</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    <Badge variant="secondary" className="bg-muted/50 font-normal text-xs py-1 px-3">
-                      {specialist.category}
-                    </Badge>
-                    <Badge variant="secondary" className="bg-muted/50 font-normal text-xs py-1 px-3">
-                      В штате компании
-                    </Badge>
-                    <Badge variant="secondary" className="bg-muted/50 font-normal text-xs py-1 px-3">
-                      8 лет опыта
-                    </Badge>
-                  </div>
-
-                  <div className="flex items-center justify-between pt-6 border-t border-border/50">
-                    <div className="flex flex-col">
-                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold mb-1">СТОИМОСТЬ</span>
-                      <span className="text-lg font-bold text-foreground">{specialist.price}</span>
-                    </div>
-                    <Button size="sm" className="rounded-xl px-6 h-10" onClick={scrollToContact}>
-                      Связаться с нами
-                    </Button>
-                  </div>
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {leadTeam.map((member, index) => (
+            <div key={member.name} className="section-card p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.95),rgba(237,232,225,0.95))] text-lg font-semibold text-primary">
+                  0{index + 1}
                 </div>
+                <BadgeCheck className="h-5 w-5 text-accent" />
               </div>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Button variant="outline" size="lg" className="rounded-xl px-12 h-14 text-lg transition-all hover:bg-primary hover:text-primary-foreground hover:border-primary">
-              Показать всех специалистов
-            </Button>
-          </div>
+              <h3 className="mt-8 text-2xl font-semibold text-[var(--brand-ink)]">{member.name}</h3>
+              <p className="mt-4 text-sm leading-7 text-muted-foreground">{member.role}</p>
+              <div className="mt-8 border-t border-border/60 pt-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+                Включается в проект на нужной глубине
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
